@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import { useDarkMode } from "../../hooks/useDarkMode";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useDarkMode();
@@ -107,21 +108,23 @@ const Navbar = () => {
             )}
           </button>
 
-          <a href="#login" className="text-sm font-medium hover:opacity-80 transition-opacity" style={{ 
+          <Link to="/sign-in" className="text-sm font-medium hover:opacity-80 transition-opacity" style={{ 
             color: 'var(--accent-color)' 
           }}>
             Login
-          </a>
+          </Link>
 
-          <button
-            className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
-            style={{
-              backgroundColor: "var(--accent-color)",
-              color: "var(--bg-primary)",
-            }}
-          >
-            Start Free
-          </button>
+          <Link to="/sign-up">
+            <button
+              className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+              style={{
+                backgroundColor: "var(--accent-color)",
+                color: "var(--bg-primary)",
+              }}
+            >
+              Start Free
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -133,15 +136,17 @@ const Navbar = () => {
             FLOWBIT
           </div>
           
-          <button
-            className="px-4 py-1 text-s font-medium rounded-[10px]"
-            style={{
-              backgroundColor: "var(--accent-color)",
-              color: "var(--bg-primary)",
-            }}
-          >
-            Start Free
-          </button>
+          <Link to="/sign-up">
+            <button
+              className="px-4 py-1 text-s font-medium rounded-[10px]"
+              style={{
+                backgroundColor: "var(--accent-color)",
+                color: "var(--bg-primary)",
+              }}
+            >
+              Start Free
+            </button>
+          </Link>
         </div>
 
         {/* Navigation Links Container - Centered with Border */}

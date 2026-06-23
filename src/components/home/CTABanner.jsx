@@ -1,5 +1,6 @@
 import React from 'react';
 import ctaTeamMeeting from "../../assets/cta-team-meeting.png";
+import { Link } from "react-router-dom";
 
 const CTABanner = () => {
   return (
@@ -31,9 +32,11 @@ const CTABanner = () => {
             
             {/* Buttons - SIDE BY SIDE on mobile! */}
             <div className="flex gap-3 md:gap-4 w-full max-w-md">
-              <button className="flex-1 px-6 py-3 bg-white text-gray-900 text-sm font-medium  hover:opacity-90 transition-colors">
-                Get started
-              </button>
+              <Link to="/sign-up" className="flex-1">
+                <button className="w-full px-6 py-3 bg-white text-gray-900 text-sm font-medium  hover:opacity-90 transition-colors">
+                  Get started
+                </button>
+              </Link>
               <button className="flex-1 px-6 py-3 border-2 border-white bg-transparent text-white text-sm font-medium  hover:bg-white/10 transition-colors">
                 Learn more
               </button>

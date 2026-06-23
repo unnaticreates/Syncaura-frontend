@@ -1,5 +1,6 @@
 import React from 'react';
 import heroTeam from "../../assets/hero-team.png";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const scrollToFeatures = (e) => {
@@ -29,15 +30,17 @@ const Hero = () => {
 
             {/* Buttons - Exact Figma Layout */}
             <div className="flex justify-center md:justify-start gap-3 pt-6">
-  <button
-    className="px-8 md:px-5 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity"
-    style={{ 
-      backgroundColor: 'var(--accent-color)',
-      color: 'var(--bg-primary)'
-    }}
-  >
-    Get started
-  </button>
+  <Link to="/sign-up">
+    <button
+      className="px-8 md:px-5 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity w-full md:w-auto"
+      style={{ 
+        backgroundColor: 'var(--accent-color)',
+        color: 'var(--bg-primary)'
+      }}
+    >
+      Get started
+    </button>
+  </Link>
 
   <button
     onClick={scrollToFeatures}

@@ -6,7 +6,7 @@ import {
   refreshAccessToken,
 } from "../features/authThunks";
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("accessToken");
 
 const initialState = {
   user: null,
@@ -30,17 +30,17 @@ const authSlice = createSlice({
       state.token = token;
       state.isAuthenticated = true;
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem("accessToken", token);
       }
     },
     logout(state) {
-      state.isLoading=true
+      state.isLoading = true;
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      state.isLoading=false;
+      state.isLoading = false;
     },
   },
   extraReducers: (builder) => {
