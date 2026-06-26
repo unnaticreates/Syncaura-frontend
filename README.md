@@ -103,7 +103,7 @@ Syncaura connects multi-role interfaces (Admin, Co-Admin, and User) with global 
    * **On Failure**: Emits an `auth_session_expired` event, clears tokens, logs the user out, and redirects them to the Sign In screen.
 
 ## Cost-Efficient Architecture
-* **Client-Side Validation**:catches format errors before hitting the network, saving server CPU cycles.
+* **Client-Side Validation**: catches format errors before hitting the network, saving server CPU cycles.
 * **Request Queuing Interceptor**: Pauses outgoing calls during token refresh to avoid duplicate refresh calls.
 * **Redux Selector Memoization**: Prevents unnecessary UI renders and keeps the app fast.
 
