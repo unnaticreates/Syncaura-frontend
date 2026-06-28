@@ -1,9 +1,11 @@
-import { useState } from "react";
+
 import ToggleSwitch from "../../dashboard/Header/ToggleSwitch";
 import { useSelector } from "react-redux";
+import { Menu } from "lucide-react";
 
 const Header = ({ setOpen }) => {
-  const user=useSelector((state)=> state.auth.user)
+  const user = useSelector((state) => state.auth.user);
+
   const today = new Date();
 
   const formattedDate = today.toLocaleDateString("en-US", {
@@ -21,6 +23,17 @@ const Header = ({ setOpen }) => {
       <div className="w-full flex items-center justify-between px-3 sm:px-4 lg:px-6">
         {/* LEFT SECTION */}
         <div className="flex items-center gap-3 sm:gap-5">
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden"
+            onClick={() => setOpen(true)}
+          >
+            <Menu
+              size={28}
+              className="text-black dark:text-white"
+            />
+          </button>
+
           {/* Profile Section */}
           <div className="flex gap-2 items-center">
             {/* Avatar */}
@@ -31,9 +44,14 @@ const Header = ({ setOpen }) => {
             {/* Profile Text */}
             <div className="flex flex-col">
               <div className="flex gap-1 items-center text-black dark:text-white">
-                <h1 className="font-light text-base sm:text-lg">Hello!</h1>
-                <h1 className="font-semibold text-base sm:text-lg">{user?.name || "John Doe"}</h1>
+                <h1 className="font-light text-base sm:text-lg">
+                  Hello!
+                </h1>
+                <h1 className="font-semibold text-base sm:text-lg">
+                  {user?.name || "John Doe"}
+                </h1>
               </div>
+
               <div className="text-[#989696] font-semibold text-xs sm:text-sm -mt-1">
                 Employee
               </div>
@@ -45,22 +63,18 @@ const Header = ({ setOpen }) => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 items-end">
           {/* Desktop date */}
           <div className="hidden xsm:flex items-center gap-2 text-base dark:text-white">
-            <div className="flex items-center justify-center gap-1.5 ">
+            <div className="flex items-center justify-center gap-1.5">
               <span className="font-bold">{dayName}</span>
               <span className="font-light"> | {formattedDate}</span>
             </div>
+
             <ToggleSwitch />
           </div>
 
-          {/* Mobile toggle and date below */}
+          {/* Mobile toggle */}
           <div className="xsm:hidden flex flex-col items-center">
             <ToggleSwitch />
           </div>
-
-          {/* Desktop toggle */}
-          {/* <div className="hidden xsm:block">
-            <ToggleSwitch />
-          </div> */}
         </div>
       </div>
     </div>
