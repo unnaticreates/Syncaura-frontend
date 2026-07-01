@@ -232,125 +232,16 @@ const SignUp = () => {
   const ThemeIcon = isDark ? Moon : Sun;
 
   return (
-    <div
-      style={{ backgroundColor: t.pageBg }}
-      className="w-full min-h-screen flex items-center justify-center px-6 py-8 transition-colors duration-500"
-    >
-      <style>{`
-        .su-form input {
-          background-color: ${t.inputBg} !important;
-          color: ${t.inputText} !important;
-          border-color: ${t.inputBorder} !important;
-          border-radius: 0px !important;
-        }
-
-        .su-form input::placeholder {
-          color: ${t.inputPlaceholder} !important;
-          opacity: 1;
-        }
-
-        .su-form .input-wrapper,
-        .su-form [class*="wrapper"],
-        .su-form [class*="field-wrap"] {
-          background-color: ${t.inputBg} !important;
-          border-color: ${t.inputBorder} !important;
-          border-radius: 0px !important;
-        }
-
-        .su-form label,
-        .su-form [class*="label"],
-        .su-form [class*="field-label"] {
-          color: ${t.labelColor} !important;
-        }
-
-        .su-form button[type="submit"] {
-          border-radius: 0px !important;
-        }
-
-        .su-form .social-btn {
-          border-radius: 0px !important;
-        }
-      `}</style>
-
-      <div
-        className="relative w-full"
-        style={{ maxWidth: 980 }}
-      >
-        <motion.div
-          className="relative flex shadow-2xl overflow-hidden"
-          style={{
-            minHeight: 620,
-            background: `linear-gradient(160deg, ${t.curveStart} 0%, ${t.curveEnd} 100%)`,
-          }}
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 280,
-            damping: 24,
-          }}
-        >
-
-          {/* ══ CURVE SHAPE ══ */}
-          <svg
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              zIndex: 20,
-              pointerEvents: "none",
-            }}
-            viewBox="0 0 860 600"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient
-                id="shapeGrad"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor={t.curveStart}
-                />
-
-                <stop
-                  offset="90%"
-                  stopColor={t.curveEnd}
-                />
-              </linearGradient>
-
-              <clipPath id="cardBounds">
-                <rect
-                  width="860"
-                  height="600"
-                />
-              </clipPath>
-            </defs>
-
-            <g clipPath="url(#cardBounds)">
-
-              {/* WHITE AREA */}
-              <rect
-                x="0"
-                y="0"
-                width="980"
-                height="600"
-                fill={t.leftBg}
-                style={{ transition: "fill 0.5s" }}
-              />
-
-              {/* BIG BLUE CURVE */}
-              <circle
-                cx="950"
-                cy="-70"
-                r="670"
-                fill="url(#shapeGrad)"
+    <div style={styles.page}>
+      <div style={styles.card}>
+        <div style={styles.logoWrap}>
+          <div style={styles.logo}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 2L21 7V17L12 22L3 17V7L12 2Z"
+                fill="url(#grad2)"
+                stroke="white"
+                strokeWidth="0.5"
               />
 
               {/* SMALL BOTTOM CIRCLE */}
@@ -468,6 +359,8 @@ const SignUp = () => {
                   </p>
                 )}
               </div>
+            </div>
+          </div>
 
               {/* CONFIRM PASSWORD */}
               <div className="flex flex-col gap-1">
@@ -499,21 +392,20 @@ const SignUp = () => {
                 )}
               </div>
 
-              {/* BUTTON */}
-              <motion.button
-                type="submit"
-                disabled={isLoading}
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: t.btnShadow,
-                }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  backgroundColor: t.btnBg,
-                  color: t.btnText,
-                  borderRadius: "0px",
-                }}
-                className="w-full mt-3 py-3 font-bold text-sm flex items-center justify-center"
+          <div style={styles.field}>
+            <label style={styles.label}>Password</label>
+            <div style={styles.inputWrap}>
+              <Lock size={18} color="#9ca3af" />
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a password"
+                style={styles.input}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                style={styles.eyeBtn}
+                aria-label="Toggle password visibility"
               >
                 {isLoading ? (
                   <Loader className="size-4 animate-spin" />
@@ -611,30 +503,172 @@ const SignUp = () => {
                 strokeWidth={2}
                 fill={isDark ? "currentColor" : "none"}
               />
-            </motion.button>
-
-            {/* IMAGE */}
-            <img
-              src="/images/Auth/loginHuman.png"
-              alt="Sign up illustration"
-              draggable={false}
-              className="absolute object-contain select-none"
-              style={{
-                height: "115%",
-                width: "200%",
-                top: "10%",
-                left: "59%",
-                transform: "translateX(-40%)",
-                zIndex: 40,
-              }}
-            />
-
+              <button
+                type="button"
+                onClick={() => setShowConfirm((v) => !v)}
+                style={styles.eyeBtn}
+                aria-label="Toggle confirm password visibility"
+              >
+                {showConfirm ? <EyeOff size={18} color="#9ca3af" /> : <Eye size={18} color="#9ca3af" />}
+              </button>
+            </div>
           </div>
 
-        </motion.div>
+          <label style={styles.checkboxRow}>
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              style={styles.checkbox}
+            />
+            <span style={styles.checkboxText}>
+              I agree to the{" "}
+              <a href="#" style={styles.link}>
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a href="#" style={styles.link}>
+                Privacy Policy
+              </a>
+            </span>
+          </label>
+
+          <button type="submit" style={styles.primaryBtn}>
+            Sign Up
+          </button>
+
+          <div style={styles.dividerWrap}>
+            <span style={styles.dividerLine} />
+            <span style={styles.dividerText}>or</span>
+            <span style={styles.dividerLine} />
+          </div>
+
+          <button type="button" style={styles.googleBtn}>
+            <GoogleIcon />
+            <span>Continue with Google</span>
+          </button>
+
+          <p style={styles.switchText}>
+            Already have an account?{" "}
+            <a
+              href="#"
+              style={styles.switchLink}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/");
+              }}
+            >
+              Login
+            </a>
+          </p>
+        </form>
       </div>
+
+      <style>{`
+        * { box-sizing: border-box; }
+        input:focus {
+          outline: none;
+          border-color: #7c3aed !important;
+          box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+        }
+        button:focus-visible {
+          outline: 2px solid #7c3aed;
+          outline-offset: 2px;
+        }
+        a:hover { text-decoration: underline; }
+      `}</style>
     </div>
   );
-};
+}
 
-export default SignUp;
+const styles = {
+  page: {
+    minHeight: "100vh",
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "linear-gradient(135deg, #ede9fe 0%, #e0e7ff 50%, #ddd6fe 100%)",
+    padding: "24px",
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  },
+  card: {
+    width: "100%",
+    maxWidth: "440px",
+    background: "#ffffff",
+    borderRadius: "20px",
+    padding: "40px 36px",
+    boxShadow: "0 20px 50px rgba(109, 40, 217, 0.12)",
+  },
+  logoWrap: { marginBottom: "20px" },
+  logo: {
+    width: "48px",
+    height: "48px",
+    borderRadius: "12px",
+    background: "linear-gradient(135deg, #c4b5fd, #7c3aed)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: { fontSize: "26px", fontWeight: 800, color: "#111827", margin: "0 0 6px 0" },
+  subtitle: { fontSize: "14.5px", color: "#6b7280", margin: "0 0 28px 0" },
+  form: { display: "flex", flexDirection: "column", gap: "18px" },
+  row: { display: "flex", gap: "12px", flexWrap: "wrap" },
+  field: { display: "flex", flexDirection: "column", gap: "8px" },
+  fieldHalf: { display: "flex", flexDirection: "column", gap: "8px", flex: "1 1 140px", minWidth: 0 },
+  label: { fontSize: "13.5px", fontWeight: 700, color: "#1f2937" },
+  inputWrap: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    border: "1.5px solid #e5e7eb",
+    borderRadius: "12px",
+    padding: "13px 14px",
+    background: "#fafafa",
+    transition: "border-color 0.15s, box-shadow 0.15s",
+  },
+  input: {
+    border: "none",
+    outline: "none",
+    background: "transparent",
+    flex: 1,
+    fontSize: "14.5px",
+    color: "#111827",
+    minWidth: 0,
+  },
+  eyeBtn: { background: "none", border: "none", padding: 0, display: "flex", cursor: "pointer" },
+  link: { color: "#7c3aed", fontSize: "13.5px", fontWeight: 600, textDecoration: "none" },
+  checkboxRow: { display: "flex", alignItems: "flex-start", gap: "10px", cursor: "pointer" },
+  checkbox: { marginTop: "3px", width: "16px", height: "16px", accentColor: "#7c3aed", cursor: "pointer" },
+  checkboxText: { fontSize: "13.5px", color: "#4b5563", lineHeight: 1.5 },
+  primaryBtn: {
+    border: "none",
+    borderRadius: "12px",
+    padding: "14px",
+    background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+    color: "#fff",
+    fontSize: "15.5px",
+    fontWeight: 700,
+    cursor: "pointer",
+    boxShadow: "0 8px 20px rgba(109, 40, 217, 0.25)",
+  },
+  dividerWrap: { display: "flex", alignItems: "center", gap: "12px", margin: "2px 0" },
+  dividerLine: { flex: 1, height: "1px", background: "#e5e7eb" },
+  dividerText: { fontSize: "13px", color: "#9ca3af" },
+  googleBtn: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
+    border: "1.5px solid #e5e7eb",
+    borderRadius: "12px",
+    padding: "13px",
+    background: "#fff",
+    fontSize: "14.5px",
+    fontWeight: 600,
+    color: "#374151",
+    cursor: "pointer",
+  },
+  switchText: { textAlign: "center", fontSize: "13.5px", color: "#6b7280", margin: "4px 0 0 0" },
+  switchLink: { color: "#7c3aed", fontWeight: 700, textDecoration: "none" },
+};
