@@ -1,27 +1,179 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Loader, Mail } from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import SocialAuthButton from "../components/auth/SocialAuthButton";
+import { motion } from "framer-motion";
+import PasswordField from "../components/auth/PasswordField";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import AnimatedInput from "../components/auth/AnimatedInput";
+import { toast } from "react-toastify";
+import { loginUser } from "../redux/features/authThunks";
+import { useDispatch, useSelector } from "react-redux";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub, FaFacebook } from "react-icons/fa";
+import BASE_URL from "../config/routes";
+import { setCredentials } from "../redux/slices/authSlice";
 
-const GoogleIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 48 48">
-    <path
-      fill="#FFC107"
-      d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"
-    />
-    <path
-      fill="#FF3D00"
-      d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4c-7.4 0-13.8 4.1-17.2 10.2z"
-    />
-    <path
-      fill="#4CAF50"
-      d="M24 44c5.5 0 10.4-1.9 14.1-5.1l-6.5-5.5c-2 1.5-4.6 2.6-7.6 2.6-5.2 0-9.6-3.3-11.2-8l-6.6 5C9.9 39.6 16.4 44 24 44z"
-    />
-    <path
-      fill="#1976D2"
-      d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.3-4.1 5.7l6.5 5.5C41.5 36.4 44 30.7 44 24c0-1.3-.1-2.7-.4-3.5z"
-    />
-  </svg>
-);
+
+const SignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const dispatch=useDispatch()
+
+  const wrapperRef = useRef(null);
+  const passRef = useRef(null);
+  const [isSubmitting, setIsSubmitting]=useState(false);
+  const navigate=useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const handleGoogleLogin = () => {
+    try {
+      window.location.href = `${BASE_URL}/api/auth/google`;
+    } catch (error) {
+      console.error("Google login initiation failed:", error);
+      toast.error("Failed to initiate Google Login. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    const token = searchParams.get("token") || searchParams.get("accessToken");
+    const refreshToken = searchParams.get("refreshToken");
+    const role = searchParams.get("role");
+    const userName = searchParams.get("name");
+
+    if (error) {
+      toast.error(decodeURIComponent(error));
+      navigate("/sign-in", { replace: true });
+    } else if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("accessToken", token);
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+
+      dispatch(
+        setCredentials({
+          user: { name: userName || "User", role: role || "user" },
+          token,
+        })
+      );
+
+      toast.success(`Welcome Back ${userName || "User"}!!`);
+
+      switch (role) {
+        case "Admin":
+          navigate("/admin");
+          break;
+        case "Co-Admin":
+          navigate("/co-admin");
+          break;
+        default:
+          navigate("/user-dashboard");
+      }
+    }
+  }, [searchParams, dispatch, navigate]);
+
+  const socialProviders = [
+    {
+      id: "google",
+      icon: "/images/Auth/google.png",
+      alt: "Google login",
+      onClick: handleGoogleLogin,
+    },
+    {
+      id: "github",
+      icon: "/images/Auth/github.png",
+      alt: "GitHub login",
+      onClick: () => console.log("GitHub Login"),
+    },
+    {
+      id: "facebook",
+      icon: "/images/Auth/facebook.png",
+      alt: "Facebook login",
+      onClick: () => console.log("Facebook Login"),
+    },
+  ];
+
+  const handleFocus = (ref) => {
+    ref.current?.classList.add(
+      "border-[#01509C]",
+      "ring-2",
+      "ring-[#01509C]/30",
+    );
+  };
+  const handleBlur = (ref) => {
+    ref.current?.classList.remove(
+      "border-[#01509C]",
+      "ring-2",
+      "ring-[#01509C]/30",
+    );
+  };
+  const onSubmit = async (data) => {
+     try {
+      setIsSubmitting(true)
+       const res = await dispatch(loginUser(data)).unwrap();
+       console.log(res);
+       
+ 
+       toast.success(`Welcome Back ${res?.user?.name}!!`);
+ 
+       switch (res?.user?.role) {
+         case "Admin":
+           navigate("/admin");
+           break;
+         case "Co-Admin":
+           navigate("/co-admin");
+           break;
+         default:
+           navigate("/user-dashboard");
+       }
+     } catch (err) {
+       toast.error(err || "Registration failed");
+     }finally{
+      setIsSubmitting(false)
+     }
+   };
+ 
+   const onError = (errors) => {
+    setIsSubmitting(false)
+     const firstError = Object.values(errors)[0];
+ 
+     if (firstError?.message) {
+       toast.error(firstError.message);
+     } else {
+       toast.error("Please fix the form errors");
+     }
+ 
+     console.log(errors);
+   };
+ 
+ return (
+  <div className="w-full h-screen bg-black flex items-center justify-center">
+
+    {/* MAIN WHITE CONTAINER */}
+    <div className="w-[95%] h-[90%] bg-white dark:bg-[#0F172A] rounded-3xl flex overflow-hidden relative">
+
+      {/* LEFT SIDE */}
+      <div className="w-[45%] bg-[#1E4D7B] relative flex items-center justify-center">
+
+        {/* CURVE */}
+        <div className="absolute right-0 top-0 w-[70%] h-full bg-white dark:bg-[#0F172A] rounded-l-[100px]"></div>
+
+        {/* IMAGE */}
+        <img
+  src="/images/Auth/loginHuman.png"
+  alt="login"
+  className="w-[420px] lg:w-[500px] z-10 scale-x-[-1]"
+/>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="w-full flex flex-col items-center max-w-md space-y-5">
 
 // onSwitchToSignup: optional callback to navigate to the Signup page (e.g. via react-router)
 export default function Login() {
@@ -53,33 +205,44 @@ export default function Login() {
         <h1 style={styles.title}>Welcome Back 👋</h1>
         <p style={styles.subtitle}>Login to your account and continue</p>
 
-        <form style={styles.form} onSubmit={(e) => e.preventDefault()}>
-          <div style={styles.field}>
-            <label style={styles.label}>Email</label>
-            <div style={styles.inputWrap}>
-              <Mail size={18} color="#9ca3af" />
-              <input type="email" placeholder="Enter your email" style={styles.input} />
-            </div>
+          {/* EMAIL */}
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">📧</span>
+            <input
+              type="email"
+              placeholder="Email Address"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email",
+                },
+              })}
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Password</label>
-            <div style={styles.inputWrap}>
-              <Lock size={18} color="#9ca3af" />
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                style={styles.input}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                style={styles.eyeBtn}
-                aria-label="Toggle password visibility"
-              >
-                {showPassword ? <EyeOff size={18} color="#9ca3af" /> : <Eye size={18} color="#9ca3af" />}
-              </button>
-            </div>
+          {/* PASSWORD */}
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">🔒</span>
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password", {
+                required: "Password is required",
+              })}
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
           <div style={styles.forgotWrap}>
@@ -98,10 +261,17 @@ export default function Login() {
             <span style={styles.dividerLine} />
           </div>
 
-          <button type="button" style={styles.googleBtn}>
-            <GoogleIcon />
-            <span>Continue with Google</span>
-          </button>
+<div className="flex justify-center gap-4 mb-4">
+  <button type="button" onClick={handleGoogleLogin} className="border p-2 rounded-md hover:shadow">
+    <FcGoogle size={20} />
+  </button>
+  <button className="border p-2 rounded-md hover:shadow">
+    <FaGithub size={20} />
+  </button>
+  <button className="border p-2 rounded-md hover:shadow">
+    <FaFacebook size={20} className="text-blue-600" />
+  </button>
+</div>
 
           <p style={styles.switchText}>
             Don't have an account?{" "}

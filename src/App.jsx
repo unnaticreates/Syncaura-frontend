@@ -13,6 +13,7 @@ import UserDashboard from "./pages/UserDashboard";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import AuthCallback from "./pages/AuthCallback";
 import Header from "./components/Meeting/Header/Header";
 import MobileSidebar from "./components/MobileSidebar";
 import Complaints from "./pages/Complaints";
@@ -21,6 +22,8 @@ import Notice from "./pages/Notice";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
+import GithubCallback from "./pages/GithubCallback";
+
 
 import { ToastContainer, Bounce } from "react-toastify";
 import { refreshAccessToken } from "./redux/features/authThunks";
@@ -36,32 +39,39 @@ export default function App() {
   const authChecking = useSelector((state) => state.auth.authChecking);
 
   useEffect(() => {
-    dispatch(refreshAccessToken());
+    // dispatch(refreshAccessToken());
+    console.log(
+    "GitHub Client ID:",
+    import.meta.env.VITE_GITHUB_CLIENT_ID
+  );
+    
 
     // ✅ BACKEND CONNECTION TEST
-    fetch("/api/test")
+    /*****fetch("/api/test")
       .then((res) => res.json())
       .then((data) => {
         console.log("✅ Backend Connected:", data);
       })
       .catch((err) => {
         console.error("❌ Backend NOT connected:", err);
-      });
+      });*****/
 
   }, [dispatch]);
 
   console.log({ user, authChecking });
 
-  if (authChecking) {
-    return (
-      <div
-        data-theme={isDark ? "dark" : "light"}
-        className="w-full h-screen bg-white dark:bg-black flex items-center justify-center"
-      >
-        <Loader className="size-5 lg:size-13 page-2xl:size-15 text-blue-600 dark:text-[#73FBFD] animate-spin duration-200" />
-      </div>
-    );
-  }
+  
+    if (false) {
+  return (
+    <div
+      data-theme={isDark ? "dark" : "light"}
+      className="w-full h-screen bg-white dark:bg-black flex items-center justify-center"
+    >
+      <Loader className="size-5 lg:size-13 page-2xl:size-15 text-blue-600 dark:text-[#73FBFD] animate-spin duration-200" />
+    </div>
+  );
+}
+  
 
   return (
     <>
@@ -81,11 +91,19 @@ export default function App() {
 
       <BrowserRouter>
         <Routes>
+          <Route path="/test" element={<h1>TEST PAGE</h1>} />
+          <Route
+              path="/auth/github/callback"
+              element={<GithubCallback />}
+            />
+                  
           <Route element={<ProtectRoute publicOnly />}>
             <Route path="/" element={<Home />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
           </Route>
+          
 
           <Route
             element={<ProtectRoute allowedRoles={["user", "admin", "co-admin"]} />}

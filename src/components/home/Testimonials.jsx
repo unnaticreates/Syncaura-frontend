@@ -10,7 +10,7 @@ const Testimonials = () => {
 
   return (
     <>
-      <style jsx>{`
+      <style>{`
         @keyframes scroll-testimonials {
           0% {
             transform: translateX(0);

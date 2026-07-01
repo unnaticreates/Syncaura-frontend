@@ -1,35 +1,235 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Mail, Lock, User } from "lucide-react";
-import { Eye, EyeOff } from "lucide-react";
+import { Loader, Moon, Sun } from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+import PasswordField from "../components/auth/PasswordField";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import AnimatedInput from "../components/auth/AnimatedInput";
+import { useSelector, useDispatch } from "react-redux";
+import { registerUser } from "../redux/features/authThunks";
+import { toast } from "react-toastify";
+import BASE_URL from "../config/routes";
+import { setCredentials } from "../redux/slices/authSlice";
 
-const GoogleIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 48 48">
-    <path
-      fill="#FFC107"
-      d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"
-    />
-    <path
-      fill="#FF3D00"
-      d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4c-7.4 0-13.8 4.1-17.2 10.2z"
-    />
-    <path
-      fill="#4CAF50"
-      d="M24 44c5.5 0 10.4-1.9 14.1-5.1l-6.5-5.5c-2 1.5-4.6 2.6-7.6 2.6-5.2 0-9.6-3.3-11.2-8l-6.6 5C9.9 39.6 16.4 44 24 44z"
-    />
-    <path
-      fill="#1976D2"
-      d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.3-4.1 5.7l6.5 5.5C41.5 36.4 44 30.7 44 24c0-1.3-.1-2.7-.4-3.5z"
-    />
-  </svg>
-);
 
-// onSwitchToLogin: optional callback to navigate to the Login page (e.g. via react-router)
-export default function Signup() {
+const SignUp = () => {
+  const { register, handleSubmit, watch, formState:{errors}, } = useForm();
+
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [agreed, setAgreed] = useState(false);
+  const dispatch = useDispatch();
+
+  const { isLoading } = useSelector((state) => state.auth);
+
+  const [isDark, setIsDark] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  const handleGoogleLogin = () => {
+    try {
+      window.location.href = `${BASE_URL}/api/auth/google`;
+    } catch (error) {
+      console.error("Google login initiation failed:", error);
+      toast.error("Failed to initiate Google Login. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    const token = searchParams.get("token") || searchParams.get("accessToken");
+    const refreshToken = searchParams.get("refreshToken");
+    const role = searchParams.get("role");
+    const userName = searchParams.get("name");
+
+    if (error) {
+      toast.error(decodeURIComponent(error));
+      navigate("/sign-up", { replace: true });
+    } else if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("accessToken", token);
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+
+      dispatch(
+        setCredentials({
+          user: { name: userName || "User", role: role || "user" },
+          token,
+        })
+      );
+
+      toast.success(`Welcome Back ${userName || "User"}!!`);
+
+      switch (role) {
+        case "Admin":
+          navigate("/admin");
+          break;
+        case "Co-Admin":
+          navigate("/co-admin");
+          break;
+        default:
+          navigate("/user-dashboard");
+      }
+    }
+  }, [searchParams, dispatch, navigate]);
+
+  const userRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const passRef = useRef(null);
+  const conPassRef = useRef(null);
+
+  const t = isDark
+    ? {
+      pageBg: "#000000",
+      leftBg: "#0d0d0d",
+
+      titleColor: "#00e5cc",
+      // labelColor: "#ffffff",
+      labelColor: "#00e5cc",
+
+      inputBg: "#1e1e1e",
+      inputBorder: "#2e2e2e",
+      inputText: "#cccccc",
+      inputPlaceholder: "#666666",
+
+      btnBg: "#00e5cc",
+      btnText: "#000000",
+
+      divColor: "#2e2e2e",
+      orColor: "#555555",
+
+      socialBg: "#1e1e1e",
+      socialBorder: "#2e2e2e",
+
+      loginMuted: "#888888",
+      loginLink: "#00e5cc",
+
+      toggleColor: "#ffffff",
+
+      curveStart: "#00e5cc",
+      curveEnd: "#00a896",
+
+      btnShadow: "0 8px 22px rgba(0,229,204,0.4)",
+    }
+    : {
+      pageBg: "#dce3ec",
+      leftBg: "#ffffff",
+
+      titleColor: "#2563eb",
+      labelColor: "#2563eb",
+
+      inputBg: "#f0f4fb",
+      inputBorder: "#dce3ef",
+      inputText: "#374151",
+      inputPlaceholder: "#9ca3af",
+
+      btnBg: "#2563eb",
+      btnText: "#ffffff",
+
+      divColor: "#d1d5db",
+      orColor: "#9ca3af",
+
+      socialBg: "#ffffff",
+      socialBorder: "#e5e7eb",
+
+      loginMuted: "#6b7280",
+      loginLink: "#2563eb",
+
+      toggleColor: "#000000",
+
+      curveStart: "#3b82f6",
+      curveEnd: "#1d4ed8",
+
+      btnShadow: "0 8px 22px rgba(37,99,235,0.4)",
+    };
+
+  useEffect(() => {
+    [userRef, wrapperRef, passRef, conPassRef].forEach((ref) => {
+      if (!ref?.current) return;
+
+      ref.current.style.backgroundColor = t.inputBg;
+      ref.current.style.borderColor = t.inputBorder;
+      ref.current.style.borderRadius = "0px";
+
+      const input = ref.current.querySelector("input");
+
+      if (input) {
+        input.style.backgroundColor = t.inputBg;
+        input.style.color = t.inputText;
+        input.style.borderRadius = "0px";
+      }
+    });
+  }, [isDark]);
+
+  const handleFocus = (ref) => {
+    if (!ref?.current) return;
+
+    const c = isDark ? "#00e5cc" : "#0f2b67";
+
+    ref.current.style.borderColor = c;
+    ref.current.style.boxShadow = `0 0 0 2px ${c}33`;
+  };
+
+  const handleBlur = (ref) => {
+    if (!ref?.current) return;
+
+    ref.current.style.borderColor = t.inputBorder;
+    ref.current.style.boxShadow = "";
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await dispatch(registerUser(data)).unwrap();
+
+      toast.success("Account created successfully");
+
+      switch (res?.role || data?.role) {
+        case "Admin":
+          navigate("/admin");
+          break;
+
+        case "Co-Admin":
+          navigate("/co-admin");
+          break;
+
+        default:
+          navigate("/user-dashboard");
+      }
+    } catch (err) {
+      toast.error(err || "Registration failed");
+    }
+  };
+
+  const onError = (errs) => {
+    const first = Object.values(errs)[0];
+
+    toast.error(first?.message || "Please fix the form errors");
+  };
+
+  const socialProviders = [
+    {
+      id: "google",
+      icon: "/images/Auth/google.png",
+      alt: "Google",
+      onClick: handleGoogleLogin,
+    },
+
+    {
+      id: "github",
+      icon: "/images/Auth/github.png",
+      alt: "GitHub",
+      onClick: () => console.log("GitHub Signup"),
+    },
+
+    {
+      id: "facebook",
+      icon: "/images/Auth/facebook.png",
+      alt: "Facebook",
+      onClick: () => console.log("Facebook Signup"),
+    },
+  ];
+
+  // Light mode → Sun icon (you're in light, click to go dark)
+  // Dark mode  → Moon icon (you're in dark, click to go light)
+  const ThemeIcon = isDark ? Moon : Sun;
 
   return (
     <div style={styles.page}>
@@ -43,44 +243,154 @@ export default function Signup() {
                 stroke="white"
                 strokeWidth="0.5"
               />
-              <defs>
-                <linearGradient id="grad2" x1="3" y1="2" x2="21" y2="22">
-                  <stop offset="0%" stopColor="#a78bfa" />
-                  <stop offset="100%" stopColor="#6d28d9" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
 
-        <h1 style={styles.title}>Create Account 🚀</h1>
-        <p style={styles.subtitle}>Sign up and start your journey with us</p>
+              {/* SMALL BOTTOM CIRCLE */}
+              <circle
+                cx="-20"
+                cy="620"
+                r="90"
+                fill="url(#shapeGrad)"
+              />
 
-        <form style={styles.form} onSubmit={(e) => e.preventDefault()}>
-          <div style={styles.row}>
-            <div style={styles.fieldHalf}>
-              <label style={styles.label}>First Name</label>
-              <div style={styles.inputWrap}>
-                <User size={18} color="#9ca3af" />
-                <input type="text" placeholder="First name" style={styles.input} />
+            </g>
+          </svg>
+
+          {/* LEFT SIDE */}
+          <div
+            style={{
+              width: "36%",
+              zIndex: 30,
+              position: "centre",
+            }}
+            className="px-14 py-14 flex flex-col justify-center"
+          >
+
+            <h1
+              style={{ color: t.titleColor }}
+              className="text-3xl font-bold mb-4 text-center"
+            >
+              Create Account
+            </h1>
+
+            <form
+              onSubmit={handleSubmit(onSubmit, onError)}
+              className="su-form space-y-2"
+            >
+
+              {/* NAME */}
+              <div className="flex flex-col gap-1">
+                <label
+                  style={{ color: t.labelColor }}
+                  className="text-sm font-semibold"
+                >
+                  Full Name
+                </label>
+
+                <AnimatedInput
+                  type="text"
+                  name="name"
+                  placeholder="John Doe"
+                  iconType="user"
+                  register={register}
+                  wrapperRef={userRef}
+                  handleFocus={handleFocus}
+                  handleBlur={handleBlur}
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              {/* EMAIL */}
+              <div className="flex flex-col gap-1">
+                <label
+                  style={{ color: t.labelColor }}
+                  className="text-sm font-semibold"
+                >
+                  Email Address
+                </label>
+
+                <AnimatedInput
+                  type="email"
+                  name="email"
+                  placeholder="name@company.com"
+                  iconType="mail"
+                  register={register}
+                  wrapperRef={wrapperRef}
+                  handleFocus={handleFocus}
+                  handleBlur={handleBlur}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* PASSWORD */}
+              <div className="flex flex-col gap-1">
+                <label
+                  style={{ color: t.labelColor }}
+                  className="text-sm font-semibold"
+                >
+                  Password
+                </label>
+
+                <PasswordField
+                  name="password"
+                  placeholder="Create a password"
+                  register={register}
+                  passRef={passRef}
+                  handleFocus={handleFocus}
+                  handleBlur={handleBlur}
+                  validation={{
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  }}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
             </div>
-            <div style={styles.fieldHalf}>
-              <label style={styles.label}>Last Name</label>
-              <div style={styles.inputWrap}>
-                <User size={18} color="#9ca3af" />
-                <input type="text" placeholder="Last name" style={styles.input} />
-              </div>
-            </div>
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Email</label>
-            <div style={styles.inputWrap}>
-              <Mail size={18} color="#9ca3af" />
-              <input type="email" placeholder="Enter your email" style={styles.input} />
-            </div>
-          </div>
+              {/* CONFIRM PASSWORD */}
+              <div className="flex flex-col gap-1">
+                <label
+                  style={{ color: t.labelColor }}
+                  className="text-sm font-semibold"
+                >
+                  Confirm Password
+                </label>
+
+                <PasswordField
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  register={register}
+                  passRef={conPassRef}
+                  handleFocus={handleFocus}
+                  handleBlur={handleBlur}
+                  validation={{
+                    required: "Please confirm your password",
+                    validate: (value) =>
+                      value === watch("password") ||
+                      "Passwords do not match",
+                  }}
+                />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
+              </div>
 
           <div style={styles.field}>
             <label style={styles.label}>Password</label>
@@ -97,19 +407,101 @@ export default function Signup() {
                 style={styles.eyeBtn}
                 aria-label="Toggle password visibility"
               >
-                {showPassword ? <EyeOff size={18} color="#9ca3af" /> : <Eye size={18} color="#9ca3af" />}
-              </button>
-            </div>
+                {isLoading ? (
+                  <Loader className="size-4 animate-spin" />
+                ) : (
+                  "Create Account"
+                )}
+              </motion.button>
+
+              {/* OR */}
+              <div className="flex items-center gap-3 py-1">
+                <span
+                  style={{ backgroundColor: t.divColor }}
+                  className="flex-1 h-px"
+                />
+
+                <span
+                  style={{ color: t.orColor }}
+                  className="text-xs font-semibold"
+                >
+                  OR
+                </span>
+
+                <span
+                  style={{ backgroundColor: t.divColor }}
+                  className="flex-1 h-px"
+                />
+              </div>
+
+              {/* SOCIAL */}
+              <div className="flex items-center justify-center gap-3">
+                {socialProviders.map((p) => (
+                  <motion.button
+                    key={p.id}
+                    type="button"
+                    onClick={p.onClick}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.92 }}
+                    style={{
+                      backgroundColor: t.socialBg,
+                      borderColor: t.socialBorder,
+                      borderRadius: "0px",
+                    }}
+                    className="w-11 h-11 border flex items-center justify-center social-btn"
+                  >
+                    <img
+                      src={p.icon}
+                      alt={p.alt}
+                      className="w-5 h-5 object-contain"
+                    />
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* LOGIN */}
+              <div className="flex items-center justify-center gap-1 pt-2">
+                <span
+                  style={{ color: t.loginMuted }}
+                  className="text-sm"
+                >
+                  Already have an account?
+                </span>
+
+                <Link to="/sign-in">
+                  <span
+                    style={{ color: t.loginLink }}
+                    className="text-sm font-bold hover:underline"
+                  >
+                    Login
+                  </span>
+                </Link>
+              </div>
+
+            </form>
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Confirm Password</label>
-            <div style={styles.inputWrap}>
-              <Lock size={18} color="#9ca3af" />
-              <input
-                type={showConfirm ? "text" : "password"}
-                placeholder="Confirm your password"
-                style={styles.input}
+          {/* RIGHT SIDE */}
+          <div
+            style={{ zIndex: 25 }}
+            className="relative flex-1 overflow-hidden"
+          >
+
+            {/* TOGGLE */}
+            <motion.button
+              onClick={() => setIsDark((d) => !d)}
+              whileHover={{
+                scale: 1.15,
+                rotate: 15,
+              }}
+              whileTap={{ scale: 0.9 }}
+              style={{ color: t.toggleColor }}
+              className="absolute top-5 right-5 z-50"
+            >
+              <ThemeIcon
+                size={22}
+                strokeWidth={2}
+                fill={isDark ? "currentColor" : "none"}
               />
               <button
                 type="button"
