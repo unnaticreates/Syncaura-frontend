@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import EmojiPicker from "emoji-picker-react";
 import { Paperclip, Smile } from "lucide-react";
 import { useRef, useState } from "react";
@@ -21,7 +22,7 @@ export default function ChatInput() {
     // ✅ File size check (5MB)
     const MAX_BYTES = 5 * 1024 * 1024;
     if (file.size > MAX_BYTES) {
-      alert("File is too large. Max size is 5MB.");
+      toast.error("File is too large. Max size is 5MB.");
       fileRef.current.value = "";
       return;
     }
@@ -37,7 +38,7 @@ export default function ChatInput() {
     ];
 
     if (!allowedTypes.includes(file.type)) {
-      alert("Unsupported file type.");
+     toast.error("Unsupported file type.");
       fileRef.current.value = "";
       return;
     }
@@ -61,19 +62,19 @@ export default function ChatInput() {
       });
 
       console.log("Upload success:", res.data);
-      alert("File uploaded successfully ✅");
+      toast.success("File uploaded successfully ✅");
     } catch (err) {
       console.error("Upload error:", err);
 
       // ❌ Removed fake success — now real error only
       if (!err.response) {
-        alert("Backend not reachable. Please start your server.");
+        toast.error("Backend not reachable. Please start your server.");
       } else {
         const msg =
           err.response?.data?.message ||
           err.response?.statusText ||
           "Upload failed";
-        alert(msg);
+        toast.error(msg);
       }
     } finally {
       setUploading(false);

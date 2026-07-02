@@ -35,20 +35,31 @@ export default function App() {
   const user = useSelector((state) => state.auth.user);
   const authChecking = useSelector((state) => state.auth.authChecking);
 
-  useEffect(() => {
-    dispatch(refreshAccessToken());
+useEffect(() => {
+  dispatch(refreshAccessToken());
 
-    // ✅ BACKEND CONNECTION TEST
-    fetch("/api/test")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("✅ Backend Connected:", data);
-      })
-      .catch((err) => {
-        console.error("❌ Backend NOT connected:", err);
-      });
+  // Backend connection test
+  fetch("/api/test")
+    .then(async (res) => {
+      if (!res.ok) {
+        throw new Error(`HTTP Error: ${res.status}`);
+      }
 
-  }, [dispatch]);
+      const contentType = res.headers.get("content-type");
+
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Expected JSON response but received something else.");
+      }
+
+      return res.json();
+    })
+    .then((data) => {
+      console.log("✅ Backend Connected:", data);
+    })
+    .catch((err) => {
+      console.error("❌ Backend Connection Error:", err.message);
+    });
+}, [dispatch]);
 
   console.log({ user, authChecking });
 
