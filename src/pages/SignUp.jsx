@@ -7,10 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
 import { useSelector, useDispatch } from "react-redux";
 import { registerUser } from "../redux/features/authThunks";
-import { toast } from "react-toastify";
+import { validationRules } from "../constant/validationRules";
+import { handleError, handleSuccess } from "../services/errorHandler";
 
 const SignUp = () => {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -125,9 +126,11 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     try {
+      // 🚀 SIGNUP API (Aiswarya): Dispatch signup payload to registerUser
       const res = await dispatch(registerUser(data)).unwrap();
 
-      toast.success("Account created successfully");
+      // 🎉 TOASTS (Vedant): Show success notification
+      handleSuccess("Account created successfully!");
 
       switch (res?.role || data?.role) {
         case "Admin":
@@ -142,14 +145,15 @@ const SignUp = () => {
           navigate("/user-dashboard");
       }
     } catch (err) {
-      toast.error(err || "Registration failed");
+      // ❌ ERROR HANDLING (Vedant): Process backend signup errors
+      handleError(err || "Registration failed");
     }
   };
 
   const onError = (errs) => {
+    // ❌ ERROR HANDLING (Vedant): Show first validation error message
     const first = Object.values(errs)[0];
-
-    toast.error(first?.message || "Please fix the form errors");
+    handleError(first?.message || "Please fix the form errors");
   };
 
   const socialProviders = [
@@ -349,7 +353,11 @@ const SignUp = () => {
                   wrapperRef={userRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.name}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+                )}
               </div>
 
               {/* EMAIL */}
@@ -370,7 +378,11 @@ const SignUp = () => {
                   wrapperRef={wrapperRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.email}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+                )}
               </div>
 
               {/* PASSWORD */}
@@ -389,7 +401,11 @@ const SignUp = () => {
                   passRef={passRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.password}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
+                )}
               </div>
 
               {/* CONFIRM PASSWORD */}
@@ -408,7 +424,11 @@ const SignUp = () => {
                   passRef={conPassRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.confirmPassword(watch("password"))}
                 />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
+                )}
               </div>
 
               {/* BUTTON */}

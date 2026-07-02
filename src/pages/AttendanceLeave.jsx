@@ -7,12 +7,37 @@ import {
   XCircleIcon,
 } from "lucide-react";
 import AttendanceCard from "../components/AttendanceLeave/AttendanceCard";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import AttendanceList from "../components/AttendanceLeave/AttendanceList";
 import { motion, AnimatePresence } from "framer-motion";
 import { leaveHistory } from "../constant/constant";
 import LeaveModel from "../components/AttendanceLeave/LeaveModel";
 import AttendanceLeaveFilter from "../components/AttendanceLeave/AttendanceLeaveFilter";
+
+const attendanceData = [
+  {
+    title: "Present Days",
+    value: 13,
+    borderColor: "border-[#29CC39]",
+    icon: <CircleCheckBig className="size-3.5 text-[#29CC39]" />,
+  },
+  {
+    title: "Absent Days",
+    value: 2,
+    borderColor: "border-[#FF0000]",
+    icon: (
+      <div className="border border-[#FF0000] size-3.5">
+        <XCircleIcon className="size-full text-[#FF0000]" />
+      </div>
+    ),
+  },
+  {
+    title: "Leave Taken",
+    value: 4,
+    borderColor: "border-[#FF9500]",
+    icon: <Calendar className="size-3.5 text-[#FF9500]" />,
+  },
+];
 
 const AttendanceLeave = () => {
   const [selectedId, setSelectedId] = useState(0);
@@ -27,31 +52,6 @@ const AttendanceLeave = () => {
   const [debouncedValue, setDebouncedValue] = useState("");
   const [showFilter, setShowFilter] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState(null);
-
-  const attendanceData = [
-    {
-      title: "Present Days",
-      value: 13,
-      borderColor: "border-[#29CC39]",
-      icon: <CircleCheckBig className="size-3.5 text-[#29CC39]" />,
-    },
-    {
-      title: "Absent Days",
-      value: 2,
-      borderColor: "border-[#FF0000]",
-      icon: (
-        <div className="border border-[#FF0000] size-3.5">
-          <XCircleIcon className="size-full text-[#FF0000]" />
-        </div>
-      ),
-    },
-    {
-      title: "Leave Taken",
-      value: 4,
-      borderColor: "border-[#FF9500]",
-      icon: <Calendar className="size-3.5 text-[#FF9500]" />,
-    },
-  ];
 
   useEffect(() => {
     const timer = setTimeout(
@@ -116,9 +116,9 @@ const AttendanceLeave = () => {
     };
   }, [showPopup]);
 
-  const handleApplyFilters = (newFilters) => {
+  const handleApplyFilters = useCallback((newFilters) => {
     setAppliedFilters(newFilters);
-  };
+  }, []);
 
   return (
     <div className="relative w-full min-h-[calc(92vh)] flex flex-col bg-[#FFFFFF] dark:bg-[#000000]">

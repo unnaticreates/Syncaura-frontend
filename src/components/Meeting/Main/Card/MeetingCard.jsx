@@ -1,6 +1,7 @@
 import { Video, Camera, Monitor, ArrowRight } from "lucide-react";
 import { TbBrandGoogleDrive, TbBrandTeams } from "react-icons/tb";
 import { useSelector } from "react-redux";
+import { memo } from "react";
 
 function getMeetingStatus(startTime, endTime) {
   const now = new Date();
@@ -79,7 +80,7 @@ function formatMeetingTime(startTime, endTime) {
   return `${format(start)} - ${format(end)}`;
 }
 
-export default function MeetingCard({
+const MeetingCard = memo(function MeetingCard({
   platform,
   title,
   startTime,
@@ -400,4 +401,6 @@ dark:shadow-[0_0_25px_rgba(115,251,253,0.18)]
 </div>
     </>
   );
-}
+});
+
+export default MeetingCard;

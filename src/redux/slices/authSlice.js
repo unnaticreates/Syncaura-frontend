@@ -38,14 +38,14 @@ const authSlice = createSlice({
       }
     },
     logout(state) {
-      state.isLoading=true
+      state.isLoading = true;
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("token");
-      state.isLoading=false;
+      state.isLoading = false;
     },
   },
   extraReducers: (builder) => {

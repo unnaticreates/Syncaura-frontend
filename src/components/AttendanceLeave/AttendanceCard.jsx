@@ -1,4 +1,6 @@
-const AttendanceCard = ({ title, value, borderColor, icon }) => {
+import { memo } from "react";
+
+const AttendanceCard = memo(({ title, value, borderColor, icon }) => {
   return (
     <div className="bg-[#FFFFFF] dark:bg-[#2E2F2F] w-[220px] h-[65px] px-4 rounded-2xl shadow-[0_0_10px_1px_#EDEDED] dark:shadow-[0_0_10px_1px_#171717] flex items-center justify-between">
       
@@ -23,6 +25,6 @@ const AttendanceCard = ({ title, value, borderColor, icon }) => {
       </div>
     </div>
   );
-};
+});
 
 export default AttendanceCard;
