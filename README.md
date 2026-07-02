@@ -1,240 +1,132 @@
-# Syncaura Frontend 🚀
+# Syncaura
+Collaborative workspace platform that integrates project management, real-time chat, video meetings, and attendance tracking into one seamless, multi-role dashboard.
 
-Syncaura Frontend is a modern, scalable **React-based frontend application** built using **Vite** and **Tailwind CSS**.
-It provides a dashboard-driven user interface for managing projects, tasks, chats, attendance, meetings, and more.
+Syncaura connects multi-role interfaces (Admin, Co-Admin, and User) with global Redux state management, client-side input validations, custom toast styling, and a secure JWT-based API connection with automated token refreshes.
 
-The project follows a **clean modular architecture** to ensure maintainability and smooth team collaboration.
+## Features
+* **Multi-Role Workspaces**: Customized dashboards for Admins, Co-Admins, and Users.
+* **Project & Task Management**: Interactive project boards and checklist todo trackers.
+* **Real-Time Team Chat**: Threaded team chats designed for Socket.IO WebSockets.
+* **Video Meetings**: Virtual video/audio conference scheduler and call panel.
+* **Attendance & Leaves**: Log-in sheets and calendar leave request systems.
+* **Document Vault**: Shared space to upload, organize, and preview files.
+* **Notice Board**: Corporate bulletin board for publishing team notices.
+* **Complaints Portal**: Portal for submitting and tracking workspace complaints.
+* **Global Theme Engine**: Global dark/light mode toggle with theme memory.
+* **JWT Interceptor Queue**: Handles access token injection and auto-refresh retry queues.
+* **Styled Toast Alerts**: Visual error/success alerts styled using custom toast configs.
 
----
+## Tech Stack
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend Core** | React (v19), Vite |
+| **Styling & Theme** | Tailwind CSS, Lucide React, Framer Motion |
+| **State Management** | Redux Toolkit |
+| **Routing** | React Router Dom (v7) |
+| **Network Client** | Axios |
+| **Notifications** | React Toastify |
+| **Form Validation** | React Hook Form |
 
-## 📁 Repository Structure
+## API Endpoints
 
-This section explains the frontend folder structure and the purpose of each directory and important file.
-
-```bash
-FRONTEND/
-│
-├── public/
-│   ├── background/        # Background images used across the app
-│   ├── fonts/             # Custom fonts
-│   ├── images/            # Static images
-│   └── vite.svg
-│
-├── src/
-│   ├── assets/            # Icons, images, and other static assets
-│   │
-│   ├── components/        # Reusable UI components
-│   │   ├── admin        #admin component   
-│   │   ├── AttendanceLeave/   #Attendance Leave component
-│   │   ├── auth/          # Authentication components (SignIn, SignUp)
-│   │   ├── chats/         # Chat components
-│   │   ├── complaints/    # complaint components
-│   │   ├── dashboard/     # Admin dashboard components
-│   │   ├── Document/      # Documnet components
-│   │   ├── Meeting/       # Meeting components
-│   │   ├── notice/       # Notice components
-│   │   ├── projects/      # Projects components
-│   │   ├── userdashboard/ # User dashboard components
-│   │   ├── FilterDropdown.jsx # animated reusable dropdown component
-│   │   ├── SupportChatbot.jsx # Chatbot Component
-│   │   └── MobileSidebar.jsx 
-│   │ 
-│   ├── constant/          # constant reusable folder
-│   │   └── constant.js    # constant data
-│   │ 
-│   ├── layouts/           # Layout components
-│   │   └── MainLayout.jsx # Common layout wrapper (Header, Sidebar)
-│   │
-│   ├── pages/             # Page-level components
-│   │   ├── Attendance.jsx
-│   │   ├── Admin.jsx
-│   │   ├── Chat.jsx
-│   │   ├── Complaints.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Documents.jsx
-│   │   ├── Home.jsx
-│   │   ├── Meetings.jsx
-│   │   ├── Notice.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Settings.jsx
-│   │   ├── SignIn.jsx
-│   │   ├── SignUp.jsx
-│   │   ├── Tasks.jsx
-│   │   └── UserDashboard.jsx
-│   │
-│   ├── redux/             # Global state management
-│   │   ├── slices 
-│   │   │   └── themeSlice.js  # Theme (dark/light) Slice 
-│   │   └── store.js # reduc store store
-│   │
-│   ├── App.jsx            # Root React component
-│   └── main.jsx           # Application entry point
-│
-├── .gitignore             # Git ignored files and folders
-├── eslint.config.js       # ESLint configuration
-├── index.html             # HTML entry file
-├── package.json           # Project dependencies and scripts
-├── package-lock.json      # Locked dependency versions
-├── README.md              # Project documentation
-└── vite.config.js         # Vite configuration
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Authenticate user |
+| POST | `/api/auth/logout` | Logout user |
+| POST | `/api/auth/refresh` | Refresh access token |
+| GET | `/api/auth/me` | Get current user profile |
 
 ---
 
-## Routes
-* "/normal-dashboard" => **Normal dashboard Page**
-* "/sign-up" => **Sign-Up Page**
-* "/user-dashboard" => **User dashboard Page**
-* "/meetings" => **Meeting Page**
-* "/chat" => **Chat Page**
-* "/complaints" => **Complaint Page**
-* "/projects" => **Projects Page**
-* "/attendance-leave" => **Attendance Leave Page**
-* "/settings" => **Setting Page**
-* "/" => **Home Page**
-* "/notice" => **Notice Page**
-* "/settings" => **Setting Page**
-* "/admin" => **Admin Page**
-
-## 🧩 Features Overview
-
-### 📊 Dashboard
-
-* Admin and User dashboards
-* Statistics cards
-* Interactive charts using **Chart.js**
-* Fully responsive layouts
-
-### 🔐 Authentication
-
-* Sign In & Sign Up UI
-* Role-based pages (Admin / User)
-* Ready for JWT-based authentication
-
-### 💬 Chat Module
-
-* Real-time chat UI
-* Designed for Socket.IO backend integration
-
-### 📁 Project & Task Management
-
-* Project listing and overview
-* Task management UI
-* Clean and intuitive design
-
-### 📅 Attendance & Meetings
-
-* Attendance tracking interface
-* Meetings scheduling UI
-
-### 🌗 Theme Support
-
-* Light / Dark mode
-* Global theme management using Zustand
-* Tailwind CSS + CSS variables
-
----
-
-## 🛠 Tech Stack
-
-* **React.js**
-* **Vite**
-* **Tailwind CSS**
-* **Zustand** (State Management)
-* **Chart.js**
-* **React Chart.js 2**
-* **JavaScript (ES6+)**
-* **HTML5 & CSS3**
-
----
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone "https://github.com/your-org/syncaura-frontend.git"
-cd  Syncaura-frontend
-```
-
-### 2️⃣ Install Dependencies
-
-```bash
-npm install
-```
-
-### 3️⃣ Run the Development Server
-
-```bash
-npm run dev
-```
-
-Open your browser at:
+## System Architecture
 
 ```
-http://localhost:5173
+┌────────────────────────────────────────────────────────────────────────┐
+│                        SYNCAURA CLIENT LAYER                           │
+│                                                                        │
+│  ┌───────────────────────┐  Validate Inputs  ┌──────────────────────┐  │
+│  │   UI Components &     ├──────────────────>│   validationRules    │  │
+│  │  Pages (SignIn/Up/etc)│                   └──────────────────────┘  │
+│  └──────────┬────────────┘                                             │
+│             │                                                          │
+│             │ Dispatches Actions                                       │
+│             ▼                                                          │
+│  ┌───────────────────────┐  Selects State    ┌──────────────────────┐  │
+│  │     Redux Store       │<──────────────────┤    Slices (Auth,     │  │
+│  │ (Thunks & Operations) │                   │    Theme, Meet)      │  │
+│  └──────────┬────────────┘                   └──────────────────────┘  │
+│             │                                                          │
+│             │ HTTP Requests / WebSockets                               │
+│             ▼                                                          │
+│  ┌───────────────────────┐                   ┌──────────────────────┐  │
+│  │  Axios Client Wrapper │                   │  localStorage        │  │
+│  │ (Request/Response)    │<─────────────────>│  (accessToken,       │  │
+│  │  Interceptors         │   Read/Write JWT  │   refreshToken)      │  │
+│  └──────────┬────────────┘                   └──────────────────────┘  │
+└─────────────┼──────────────────────────────────────────────────────────┘
+              │
+              │ HTTP / WebSockets (Port 5000)
+              ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                        SYNCAURA SERVER LAYER                           │
+│                                                                        │
+│  ┌───────────────────────┐                   ┌──────────────────────┐  │
+│  │  Express/Node Server  │<─────────────────>│   Socket.IO Server   │  │
+│  │  (REST Controllers)   │                   │ (Real-time events)   │  │
+│  └──────────┬────────────┘                   └──────────┬───────────┘  │
+│             │                                           │              │
+│             └───────────────────┬───────────────────────┘              │
+│                                 ▼                                      │
+│                      ┌──────────────────────┐                          │
+│                      │  MongoDB Database    │                          │
+│                      │ (User/Task Schemas)  │                          │
+│                      └──────────────────────┘                          │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
----
+## Processing Workflow
+1. **User Sign Up / Sign In**:
+   * User enters credentials in the forms.
+   * `validationRules` checks email structures, name requirements, and password length.
+   * On validation success, an `authThunk` triggers the Axios wrapper.
+2. **Authentication request**:
+   * Request interceptor retrieves `accessToken` from `localStorage` (if present) and appends it to headers.
+   * The backend validates credentials and returns a short-lived `accessToken` and a long-lived `refreshToken`.
+3. **Session Synchronization**:
+   * On response success, the thunk saves both tokens to `localStorage` and updates the global `authSlice` state.
+   * The user is automatically routed to their dashboard based on their account role (Admin, Co-Admin, or default user).
+4. **Session Token Refresh**:
+   * When an API call fails with `401 Unauthorized` (token expired), the Axios response interceptor pauses the request queue.
+   * It requests a new `accessToken` from `/auth/refresh` using the `refreshToken`.
+   * **On Success**: Restarts all queued requests with the new token.
+   * **On Failure**: Emits an `auth_session_expired` event, clears tokens, logs the user out, and redirects them to the Sign In screen.
 
-## 🔗 Backend Integration
+## Cost-Efficient Architecture
+* **Client-Side Validation**: catches format errors before hitting the network, saving server CPU cycles.
+* **Request Queuing Interceptor**: Pauses outgoing calls during token refresh to avoid duplicate refresh calls.
+* **Redux Selector Memoization**: Prevents unnecessary UI renders and keeps the app fast.
 
-This frontend is designed to work with the **Syncaura Backend** mono-repository, including:
+## Running the Application
+1. Navigate to the project directory:
+   ```bash
+   cd Syncaura-frontend-1
+   ```
+2. Install the project dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the Vite local development server:
+   ```bash
+   npm run dev
+   ```
 
-* Authentication APIs
-* CRUD services
-* Attendance & leave management
-* Real-time chat (Socket.IO)
 
-API base URLs can be configured using environment variables.
+## Roadmap
+- [ ] Connect the chat component with live WebSockets.
+- [ ] Add Jitsi Meet video frames in the meeting dashboard.
+- [ ] Integrate file upload logic in the document hub.
+- [ ] Optimize the views for mobile screens.
+- [ ] Add Progressive Web App (PWA) support for offline usage.
+- [ ] Write frontend unit tests.
 
----
-
-## 👥 Team Collaboration Rules
-
-* Single Git repository for frontend
-* Follow the modular folder structure
-* **Do not commit** `node_modules`
-* Always pull before pushing:
-
-```bash
-git pull origin main
-```
-
----
-
-## 🚫 Ignored Files
-
-The following files are excluded using `.gitignore`:
-
-* `node_modules/`
-* `dist/`
-* `.env`
-* IDE/editor configuration files
-
----
-
-## 📌 Future Enhancements
-
-* Backend API integration
-* Protected routes & role-based access
-* Mobile responsiveness improvements
-* Performance optimization
-* PWA support
-* Unit & integration testing
-
----
-
-## 📄 License
-
-This project is developed for **educational and internal purposes**.
-License information can be added if required.
-
----
-
-## 🤝 Contributors
-
-Developed and maintained by the **Syncaura Frontend Team**.
-
-⭐ If you find this project useful, consider starring the repository!
-hello

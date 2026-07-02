@@ -7,31 +7,73 @@ import Sidebar from "../components/Meeting/Sidebar/Sidebar";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 //import { getMeetings } from "../redux/features/meetingThunks";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Meetings() {
-  
-  const { t } = useTranslation();
+const demoMeetings = [
+  {
+    id: 1,
+    title: "Weekly Team Standup",
+    startTime: "2026-06-05T10:00:00",
+    endTime: "2026-06-05T11:30:00",
+    platform: "Zoom",
+    avatarCount: 4,
+    isDoc: true,
+  },
+  {
+    id: 2,
+    title: "Q3 Product Roadmap Review",
+    startTime: "2026-06-05T12:00:00",
+    endTime: "2026-06-05T13:00:00",
+    platform: "Google Meet",
+    avatarCount: 4,
+    isDoc: true,
+  },
+  {
+    id: 3,
+    title: "Design System Sync",
+    startTime: "2026-06-06T14:00:00",
+    endTime: "2026-06-06T15:00:00",
+    platform: "Google Meet",
+    avatarCount: 2,
+    isDoc: false,
+  },
+  {
+    id: 4,
+    title: "Weekly All Hands",
+    startTime: "2026-06-07T09:00:00",
+    endTime: "2026-06-07T10:00:00",
+    platform: "Zoom",
+    avatarCount: 5,
+    isDoc: false,
+  },
+  {
+    id: 5,
+    title: "Frontend Architecture",
+    startTime: "2026-06-08T11:00:00",
+    endTime: "2026-06-08T12:00:00",
+    platform: "Google Meet",
+    avatarCount: 1,
+    isDoc: false,
+  }
+];
 
+export default function Meetings() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const meetingState = useSelector((state) => state.meeting || {});
-
-const meetings = meetingState.meetings || [];
+  const meetings = useSelector((state) => state.meeting?.meetings || []);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [direction, setDirection] = useState(0);
   const [activeFilter, setActiveFilter] = useState("all");
 
-  
   useEffect(() => {
     console.log("Meetings page loaded");
   }, []);
- 
 
-  const getMeetingType = (startTime, endTime) => {
+  const getMeetingType = useCallback((startTime, endTime) => {
     const now = new Date();
     const start = new Date(startTime);
     const end = new Date(endTime);
@@ -39,11 +81,9 @@ const meetings = meetingState.meetings || [];
     if (now >= start && now <= end) return "ongoing";
     if (now < start) return "upcoming";
     return "past";
-  };
+  }, []);
 
- 
-
-  const handleFilterChange = (filter) => {
+  const handleFilterChange = useCallback((filter) => {
     const order = ["all", "upcoming", "ongoing", "past"];
 
     const currentIndex = order.indexOf(activeFilter);
@@ -51,55 +91,8 @@ const meetings = meetingState.meetings || [];
 
     setDirection(nextIndex > currentIndex ? 1 : -1);
     setActiveFilter(filter);
-  };
+  }, [activeFilter]);
 
-  const demoMeetings = [
-    {
-      id: 1,
-      title: "Weekly Team Standup",
-      startTime: "2026-06-05T10:00:00",
-      endTime: "2026-06-05T11:30:00",
-      platform: "Zoom",
-      avatarCount: 4,
-      isDoc: true,
-    },
-    {
-      id: 2,
-      title: "Q3 Product Roadmap Review",
-      startTime: "2026-06-05T12:00:00",
-      endTime: "2026-06-05T13:00:00",
-      platform: "Google Meet",
-      avatarCount: 4,
-      isDoc: true,
-    },
-    {
-      id: 3,
-      title: "Design System Sync",
-      startTime: "2026-06-06T14:00:00",
-      endTime: "2026-06-06T15:00:00",
-      platform: "Google Meet",
-      avatarCount: 2,
-      isDoc: false,
-    },
-    {
-      id: 4,
-      title: "Weekly All Hands",
-      startTime: "2026-06-07T09:00:00",
-      endTime: "2026-06-07T10:00:00",
-      platform: "Zoom",
-      avatarCount: 5,
-      isDoc: false,
-    },
-    {
-      id: 5,
-      title: "Frontend Architecture",
-      startTime: "2026-06-08T11:00:00",
-      endTime: "2026-06-08T12:00:00",
-      platform: "Google Meet",
-      avatarCount: 1,
-      isDoc: false,
-    }
-  ];
   const filteredMeetings = useMemo(() => {
     if (activeFilter === "all") return demoMeetings;
   
@@ -110,7 +103,7 @@ const meetings = meetingState.meetings || [];
           meeting.endTime
         ) === activeFilter
     );
-  }, [activeFilter]);
+  }, [activeFilter, getMeetingType]);
   return (
     <>
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />

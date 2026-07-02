@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
     Menu,
     LayoutDashboard,
@@ -28,9 +28,10 @@ const menuItems = [
     { label: "Projects", icon: Folder, path: "/projects", count: 0 },
     { label: "Chat", icon: MessageCircle, path: "/chat", count: 10 },
     { label: "Meetings", icon: Calendar, path: "/meetings", count: 2 },
-    { label: "Documents & Reports", icon: FileText, path: "/documents", count: 2 },
+    { label: "Tasks", icon: CheckSquare, path: "/tasks", count: 0 },
+    { label: "Notice", icon: Megaphone, path: "/notice", count: 0 },
+    { label: "Documents", icon: FileText, path: "/documents", count: 0 },
     { label: "Complaints", icon: AlertTriangle, path: "/complaints", count: 0 },
-    { label: "Notice", icon: Megaphone, path: "/notice", count: 3 },
     { label: "Attendance & Leave", icon: Clock, path: "/attendance-leave", count: 0 },
     { label: "Settings", icon: Settings, path: "/settings", count: 0 },
 ];
@@ -38,14 +39,14 @@ const menuItems = [
 
 
 export default function MobileSidebar({ open, setOpen }) {
-    const { isDark } = useSelector((state)=>state.theme.isDark)
-    const dispatch=useDispatch()
-    const navigate=useNavigate()
-    const logOutHandle = () => {
+    const isDark = useSelector((state) => state.theme.isDark);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logOutHandle = useCallback(() => {
         console.log('LogOut SUccessfully');
         dispatch(logout());
-        navigate("/")
-    }
+        navigate("/");
+    }, [dispatch, navigate]);
 
     return (
         <>

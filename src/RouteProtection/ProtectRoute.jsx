@@ -3,9 +3,12 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectRoute = ({ allowedRoles, publicOnly = false }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   // Determine the role-based home path for authenticated users
+  const { user, isLoading, isAuthenticated } = useSelector((state) => state.auth);
+
+  if (isLoading) return <h1>Loading...</h1>;
+
   const getRoleHome = () => {
     if (user?.role === "admin") return "/admin";
     if (user?.role === "co-admin") return "/co-admin";

@@ -3,17 +3,15 @@ import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import PasswordField from "../components/auth/PasswordField";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnimatedInput from "../components/auth/AnimatedInput";
 import { useSelector, useDispatch } from "react-redux";
 import { registerUser } from "../redux/features/authThunks";
-import { toast } from "react-toastify";
-import BASE_URL from "../config/routes";
-import { setCredentials } from "../redux/slices/authSlice";
-
+import { validationRules } from "../constant/validationRules";
+import { handleError, handleSuccess } from "../services/errorHandler";
 
 const SignUp = () => {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,55 +19,6 @@ const SignUp = () => {
   const { isLoading } = useSelector((state) => state.auth);
 
   const [isDark, setIsDark] = useState(false);
-  const [searchParams] = useSearchParams();
-
-  const handleGoogleLogin = () => {
-    try {
-      window.location.href = `${BASE_URL}/api/auth/google`;
-    } catch (error) {
-      console.error("Google login initiation failed:", error);
-      toast.error("Failed to initiate Google Login. Please try again.");
-    }
-  };
-
-  useEffect(() => {
-    const error = searchParams.get("error");
-    const token = searchParams.get("token") || searchParams.get("accessToken");
-    const refreshToken = searchParams.get("refreshToken");
-    const role = searchParams.get("role");
-    const userName = searchParams.get("name");
-
-    if (error) {
-      toast.error(decodeURIComponent(error));
-      navigate("/sign-up", { replace: true });
-    } else if (token) {
-      localStorage.setItem("token", token);
-      localStorage.setItem("accessToken", token);
-      if (refreshToken) {
-        localStorage.setItem("refreshToken", refreshToken);
-      }
-
-      dispatch(
-        setCredentials({
-          user: { name: userName || "User", role: role || "user" },
-          token,
-        })
-      );
-
-      toast.success(`Welcome Back ${userName || "User"}!!`);
-
-      switch (role) {
-        case "Admin":
-          navigate("/admin");
-          break;
-        case "Co-Admin":
-          navigate("/co-admin");
-          break;
-        default:
-          navigate("/user-dashboard");
-      }
-    }
-  }, [searchParams, dispatch, navigate]);
 
   const userRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -78,68 +27,68 @@ const SignUp = () => {
 
   const t = isDark
     ? {
-      pageBg: "#000000",
-      leftBg: "#0d0d0d",
+        pageBg: "#000000",
+        leftBg: "#0d0d0d",
 
-      titleColor: "#00e5cc",
-      // labelColor: "#ffffff",
-      labelColor: "#00e5cc",
+        titleColor: "#00e5cc",
+        // labelColor: "#ffffff",
+        labelColor: "#00e5cc",
 
-      inputBg: "#1e1e1e",
-      inputBorder: "#2e2e2e",
-      inputText: "#cccccc",
-      inputPlaceholder: "#666666",
+        inputBg: "#1e1e1e",
+        inputBorder: "#2e2e2e",
+        inputText: "#cccccc",
+        inputPlaceholder: "#666666",
 
-      btnBg: "#00e5cc",
-      btnText: "#000000",
+        btnBg: "#00e5cc",
+        btnText: "#000000",
 
-      divColor: "#2e2e2e",
-      orColor: "#555555",
+        divColor: "#2e2e2e",
+        orColor: "#555555",
 
-      socialBg: "#1e1e1e",
-      socialBorder: "#2e2e2e",
+        socialBg: "#1e1e1e",
+        socialBorder: "#2e2e2e",
 
-      loginMuted: "#888888",
-      loginLink: "#00e5cc",
+        loginMuted: "#888888",
+        loginLink: "#00e5cc",
 
-      toggleColor: "#ffffff",
+        toggleColor: "#ffffff",
 
-      curveStart: "#00e5cc",
-      curveEnd: "#00a896",
+        curveStart: "#00e5cc",
+        curveEnd: "#00a896",
 
-      btnShadow: "0 8px 22px rgba(0,229,204,0.4)",
-    }
+        btnShadow: "0 8px 22px rgba(0,229,204,0.4)",
+      }
     : {
-      pageBg: "#dce3ec",
-      leftBg: "#ffffff",
+        pageBg: "#dce3ec",
+        leftBg: "#ffffff",
 
-      titleColor: "#2563eb",
-      labelColor: "#2563eb",
+        titleColor: "#2563eb",
+        labelColor: "#2563eb",
 
-      inputBg: "#f0f4fb",
-      inputBorder: "#dce3ef",
-      inputText: "#374151",
-      inputPlaceholder: "#9ca3af",
+        inputBg: "#f0f4fb",
+        inputBorder: "#dce3ef",
+        inputText: "#374151",
+        inputPlaceholder: "#9ca3af",
 
-      btnBg: "#2563eb",
-      btnText: "#ffffff",
+        btnBg: "#2563eb",
+        btnText: "#ffffff",
 
-      divColor: "#d1d5db",
-      orColor: "#9ca3af",
+        divColor: "#d1d5db",
+        orColor: "#9ca3af",
 
-      socialBg: "#ffffff",
-      socialBorder: "#e5e7eb",
+        socialBg: "#ffffff",
+        socialBorder: "#e5e7eb",
 
-      loginMuted: "#6b7280",
-      loginLink: "#2563eb",
+        loginMuted: "#6b7280",
+        loginLink: "#2563eb",
 
-      toggleColor: "#000000",
+     toggleColor: "#000000",
 
-      curveStart: "#3b82f6",
-      curveEnd: "#1d4ed8",
+        curveStart: "#3b82f6",
+        curveEnd: "#1d4ed8",
 
-      btnShadow: "0 8px 22px rgba(37,99,235,0.4)",
-    };
+        btnShadow: "0 8px 22px rgba(37,99,235,0.4)",
+      };
 
   useEffect(() => {
     [userRef, wrapperRef, passRef, conPassRef].forEach((ref) => {
@@ -177,9 +126,11 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     try {
+      // 🚀 SIGNUP API (Aiswarya): Dispatch signup payload to registerUser
       const res = await dispatch(registerUser(data)).unwrap();
 
-      toast.success("Account created successfully");
+      // 🎉 TOASTS (Vedant): Show success notification
+      handleSuccess("Account created successfully!");
 
       switch (res?.role || data?.role) {
         case "Admin":
@@ -194,14 +145,15 @@ const SignUp = () => {
           navigate("/user-dashboard");
       }
     } catch (err) {
-      toast.error(err || "Registration failed");
+      // ❌ ERROR HANDLING (Vedant): Process backend signup errors
+      handleError(err || "Registration failed");
     }
   };
 
   const onError = (errs) => {
+    // ❌ ERROR HANDLING (Vedant): Show first validation error message
     const first = Object.values(errs)[0];
-
-    toast.error(first?.message || "Please fix the form errors");
+    handleError(first?.message || "Please fix the form errors");
   };
 
   const socialProviders = [
@@ -209,21 +161,18 @@ const SignUp = () => {
       id: "google",
       icon: "/images/Auth/google.png",
       alt: "Google",
-      onClick: handleGoogleLogin,
     },
 
     {
       id: "github",
       icon: "/images/Auth/github.png",
       alt: "GitHub",
-      onClick: () => console.log("GitHub Signup"),
     },
 
     {
       id: "facebook",
       icon: "/images/Auth/facebook.png",
       alt: "Facebook",
-      onClick: () => console.log("Facebook Signup"),
     },
   ];
 
@@ -404,7 +353,11 @@ const SignUp = () => {
                   wrapperRef={userRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.name}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+                )}
               </div>
 
               {/* EMAIL */}
@@ -425,7 +378,11 @@ const SignUp = () => {
                   wrapperRef={wrapperRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.email}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+                )}
               </div>
 
               {/* PASSWORD */}
@@ -444,7 +401,11 @@ const SignUp = () => {
                   passRef={passRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.password}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
+                )}
               </div>
 
               {/* CONFIRM PASSWORD */}
@@ -463,7 +424,11 @@ const SignUp = () => {
                   passRef={conPassRef}
                   handleFocus={handleFocus}
                   handleBlur={handleBlur}
+                  validation={validationRules.confirmPassword(watch("password"))}
                 />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
+                )}
               </div>
 
               {/* BUTTON */}
@@ -515,7 +480,6 @@ const SignUp = () => {
                   <motion.button
                     key={p.id}
                     type="button"
-                    onClick={p.onClick}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.92 }}
                     style={{
@@ -576,7 +540,7 @@ const SignUp = () => {
               <ThemeIcon
                 size={22}
                 strokeWidth={2}
-                fill={isDark ? "currentColor" : "none"}
+                 fill={isDark ? "currentColor" : "none"}
               />
             </motion.button>
 

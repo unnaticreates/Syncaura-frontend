@@ -8,6 +8,8 @@ import { loginUser } from "../redux/features/authThunks";
 import { useDispatch, useSelector } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa";
+import { validationRules } from "../constant/validationRules";
+import { handleError, handleSuccess } from "../services/errorHandler";
 import BASE_URL from "../config/routes";
 import { setCredentials } from "../redux/slices/authSlice";
 import { GITHUB_STATE_KEY } from "../hooks/useGithubCallback";
@@ -46,7 +48,7 @@ const SignIn = () => {
       window.location.href = `${BASE_URL}/api/auth/google`;
     } catch (error) {
       console.error("Google login initiation failed:", error);
-      toast.error("Failed to initiate Google Login. Please try again.");
+      handleError("Failed to initiate Google Login. Please try again.");
     }
   };
 
@@ -72,7 +74,7 @@ const SignIn = () => {
     const userName = searchParams.get("name");
 
     if (error) {
-      toast.error(decodeURIComponent(error));
+      handleError(decodeURIComponent(error));
       navigate("/sign-in", { replace: true });
     } else if (token) {
       localStorage.setItem("token", token);

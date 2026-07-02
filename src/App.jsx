@@ -23,9 +23,12 @@ import Notice from "./pages/Notice";
 import Settings from "./pages/Settings";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
+import AuthCallback from "./pages/AuthCallback";
 
 import { ToastContainer, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { refreshAccessToken } from "./redux/features/authThunks";
+import { logout } from "./redux/slices/authSlice";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import ProtectRoute from "./RouteProtection/ProtectRoute";
@@ -40,6 +43,12 @@ export default function App() {
   useEffect(() => {
     dispatch(refreshAccessToken());
 
+    // Listen to session expiration event from Axios interceptor
+    const handleSessionExpired = () => {
+      dispatch(logout());
+    };
+    window.addEventListener("auth_session_expired", handleSessionExpired);
+
     // ✅ BACKEND CONNECTION TEST
     fetch("/api/test")
       .then((res) => res.json())
@@ -50,6 +59,9 @@ export default function App() {
         console.error("❌ Backend NOT connected:", err);
       });
 
+    return () => {
+      window.removeEventListener("auth_session_expired", handleSessionExpired);
+    };
   }, [dispatch]);
 
   console.log({ user, authChecking });
