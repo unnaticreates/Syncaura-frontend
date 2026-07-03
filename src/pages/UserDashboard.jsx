@@ -36,7 +36,7 @@ const UserDashboard = () => {
             <button
               key={item}
               onClick={() => handleTabChange(item)}
-              className="relative z-10 px-3 py-1 outline-none cursor-pointer"
+              className="relative z-10 px-3 py-1 outline-none cursor-pointer btn-hover"
             >
               <motion.span
                 animate={{

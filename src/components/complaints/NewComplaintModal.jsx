@@ -72,7 +72,7 @@ export default function NewComplaintModal({ onClose, addComplaint }) {
           {/* Close */}
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+            className="absolute right-4 top-4 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white btn-hover"
           >
             <X size={18} />
           </button>

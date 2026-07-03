@@ -159,10 +159,7 @@ const Profile = () => {
         onClick={() =>
           isEditing[field] ? handleSave(field) : handleEdit(field)
         }
-        className="w-[72px] px-0 py-1 rounded-full bg-[#2461E6] text-white border border-[#2461E6] text-sm font-normal flex items-center justify-center
-        hover:bg-blue-50 hover:text-[#2461E6] 
-        dark:bg-[#73FBFD] dark:text-black dark:border-[#73FBFD] 
-        dark:hover:bg-gray-800 dark:hover:text-[#73FBFD] transition-colors shadow-sm"
+        className="w-[72px] px-0 py-1 rounded-full bg-[#2461E6] text-white border border-[#2461E6] text-sm font-normal flex items-center justify-center hover:bg-blue-50 hover:text-[#2461E6] dark:bg-[#73FBFD] dark:text-black dark:border-[#73FBFD] dark:hover:bg-gray-800 dark:hover:text-[#73FBFD] transition-colors shadow-sm btn-hover"
       >
         {savingField === field ? "..." : isEditing[field] ? t("save") : t("edit")}
       </button>
@@ -231,10 +228,7 @@ const Profile = () => {
                   ? handleSave("language")
                   : handleEdit("language")
               }
-              className="w-[72px] px-0 py-1 rounded-full bg-[#2461E6] text-white border border-[#2461E6] text-sm font-normal flex items-center justify-center
-              hover:bg-blue-50 hover:text-[#2461E6] 
-              dark:bg-[#73FBFD] dark:text-black dark:border-[#73FBFD] 
-              dark:hover:bg-gray-800 dark:hover:text-[#73FBFD] transition-colors shadow-sm"
+              className="w-[72px] px-0 py-1 rounded-full bg-[#2461E6] text-white border border-[#2461E6] text-sm font-normal flex items-center justify-center hover:bg-blue-50 hover:text-[#2461E6] dark:bg-[#73FBFD] dark:text-black dark:border-[#73FBFD] dark:hover:bg-gray-800 dark:hover:text-[#73FBFD] transition-colors shadow-sm btn-hover"
             >
               {savingField === "language"
                 ? "..."

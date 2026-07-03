@@ -62,7 +62,7 @@ const CreateTaskModal = ({ onClose, onSubmit, isLoading }) => {
           <h2 className="text-lg font-bold text-[#0A0A0A] dark:text-white">Create New Task</h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2d2f33] transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2d2f33] transition-colors btn-hover"
           >
             <X className="w-4 h-4" />
           </button>
@@ -116,9 +116,9 @@ const CreateTaskModal = ({ onClose, onSubmit, isLoading }) => {
                     key={p}
                     type="button"
                     onClick={() => setForm((prev) => ({ ...prev, priority: p }))}
-                    className={`flex-1 py-1.5 text-xs font-semibold rounded-lg capitalize transition-all ${
+                    className={`btn-hover flex-1 py-1.5 text-xs font-semibold rounded-lg capitalize ${
                       form.priority === p
-                        ? PRIORITY_COLORS[p] + " ring-2 ring-offset-1 ring-current"
+                        ? PRIORITY_COLORS[p] + "ring-2 ring-offset-1 ring-current"
                         : "bg-gray-100 dark:bg-[#2d2f33] text-gray-500 dark:text-gray-400"
                     }`}
                   >
@@ -178,14 +178,14 @@ const CreateTaskModal = ({ onClose, onSubmit, isLoading }) => {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 text-sm font-medium rounded-xl border border-gray-200 dark:border-[#2d2f33] text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-[#2d2f33] transition-colors"
+              className="flex-1 py-2.5 text-sm font-medium rounded-xl border border-gray-200 dark:border-[#2d2f33] text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-[#2d2f33] transition-colors btn-hover"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black hover:bg-blue-700 dark:hover:bg-[#5af4f5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black hover:bg-blue-700 dark:hover:bg-[#5af4f5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed btn-hover"
             >
               {isLoading ? "Creating…" : "Create Task"}
             </button>

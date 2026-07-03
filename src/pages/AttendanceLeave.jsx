@@ -129,10 +129,7 @@ const AttendanceLeave = () => {
         <div className="flex w-full flex-3/5 md:flex-2/5 2xl:flex-1/5 items-center justify-center gap-2 ">
           <button
             onClick={() => setShowFilter((prev) => !prev)}
-            className={`px-4 py-2 bg-white dark:bg-[#000000]
-                    flex items-center gap-2
-                    border rounded-4xl ${showFilter ? "border-[#2461E6]  dark:border-[#73FBFD] " : " border-[#989696] dark:border-[#989696]"}
-                    `}
+            className={`btn-hover px-4 py-2 bg-white dark:bg-[#000000] flex items-center gap-2 border rounded-4xl ${showFilter ? "border-[#2461E6] dark:border-[#73FBFD]" : "border-[#989696] dark:border-[#989696]"} `}
           >
             <Funnel
               className={`size-5 ${showFilter ? "text-[#2461E6] dark:text-[#73FBFD]" : "text-[#082A44] dark:text-[#B2B2B2]"} `}
@@ -338,7 +335,7 @@ const AttendanceLeave = () => {
 
       <button
         onClick={() => setOpenModel(true)}
-        className="fixed cursor-pointer bottom-8 right-8  rounded-2xl font-semibold px-7 py-3 z-30 bg-[#2457C5] text-[#EDEDED] dark:bg-[#73FBFD] dark:text-[#000000] text-base lg:text-xl"
+        className="fixed cursor-pointer bottom-8 right-8 rounded-2xl font-semibold px-7 py-3 z-30 bg-[#2457C5] text-[#EDEDED] dark:bg-[#73FBFD] dark:text-[#000000] text-base lg:text-xl btn-hover"
       >
         <p>Apply Leave</p>
       </button>

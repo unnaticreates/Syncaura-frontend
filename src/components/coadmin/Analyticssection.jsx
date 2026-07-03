@@ -161,7 +161,7 @@ export default function AnalyticsSection() {
         {/* header */}
         <div className="flex items-center justify-between mb-5">
           <span className="text-[16px] font-bold text-slate-800 dark:text-white">Issues &amp; Alerts</span>
-          <button className="bg-transparent border-0 cursor-pointer text-slate-400 text-xl leading-none tracking-widest">···</button>
+          <button className="bg-transparent border-0 cursor-pointer text-slate-400 text-xl leading-none tracking-widest btn-hover">···</button>
         </div>
 
         {/* segmented bar — rounded overall, no gap between segments */}
@@ -309,7 +309,7 @@ export default function AnalyticsSection() {
       <div className="bg-white dark:bg-[#1c1c1e] rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm px-5 py-4">
         <div className="flex items-center justify-between mb-5">
           <span className="text-[16px] font-bold text-slate-800 dark:text-white">Team Workload Distribution</span>
-          <button className="text-[13px] text-blue-500 font-semibold bg-transparent border-0 cursor-pointer hover:underline">
+          <button className="text-[13px] text-blue-500 font-semibold bg-transparent border-0 cursor-pointer hover:underline btn-hover">
             View All Members
           </button>
         </div>
@@ -418,7 +418,7 @@ export default function AnalyticsSection() {
               </div>
               <button
                 onClick={() => dismiss(1)}
-                className="text-slate-300 hover:text-slate-500 dark:text-slate-400 bg-transparent border-0 cursor-pointer text-base shrink-0"
+                className="text-slate-300 hover:text-slate-500 dark:text-slate-400 bg-transparent border-0 cursor-pointer text-base shrink-0 btn-hover"
               >×</button>
             </div>
           )}
@@ -440,7 +440,7 @@ export default function AnalyticsSection() {
               </div>
               <button
                 onClick={() => dismiss(2)}
-                className="text-slate-300 hover:text-slate-500 dark:text-slate-400 bg-transparent border-0 cursor-pointer text-base shrink-0"
+                className="text-slate-300 hover:text-slate-500 dark:text-slate-400 bg-transparent border-0 cursor-pointer text-base shrink-0 btn-hover"
               >×</button>
             </div>
           )}
@@ -463,14 +463,14 @@ export default function AnalyticsSection() {
               </div>
               <button
                 onClick={() => dismiss(3)}
-                className="text-slate-300 hover:text-slate-500 dark:text-slate-400 bg-transparent border-0 cursor-pointer text-base shrink-0"
+                className="text-slate-300 hover:text-slate-500 dark:text-slate-400 bg-transparent border-0 cursor-pointer text-base shrink-0 btn-hover"
               >×</button>
             </div>
           )}
 
           {/* View all notifications — grey button */}
           <button
-            className="flex-1 min-w-[130px] rounded-xl border-0 cursor-pointer font-semibold text-white text-[13px] leading-snug px-6 py-4 transition-colors"
+            className="flex-1 min-w-[130px] rounded-xl border-0 cursor-pointer font-semibold text-white text-[13px] leading-snug px-6 py-4 transition-colors btn-hover"
             style={{ background: "#94a3b8" }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "#64748b")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "#94a3b8")}
@@ -636,7 +636,7 @@ export default function AnalyticsSection() {
 
         {/* Generate Sprint Report — full-width outlined button */}
         <button
-          className="w-full flex items-center justify-center gap-2 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-[#1c1c1e] text-[13px] font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors cursor-pointer"
+          className="w-full flex items-center justify-center gap-2 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-[#1c1c1e] text-[13px] font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors cursor-pointer btn-hover"
         >
           {/* download icon */}
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">

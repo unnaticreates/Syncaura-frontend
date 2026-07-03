@@ -86,10 +86,7 @@ const Projects = () => {
               <ChevronDown className="size-5 text-[#082A44] dark:text-[#B2B2B2]" />
             </div>
 
-            <button onClick={()=>setShowFilter((prev)=> !prev)} className={`px-4 py-2  
-                    flex items-center gap-2
-                    border rounded-xl ${showFilter? "border-[#2461E6]  dark:border-[#73FBFD] bg-blue-100 dark:bg-gray-950": "border-[#EAECEF] bg-white dark:border-[#575757] dark:bg-[#575757]"}
-                    `}>
+            <button onClick={()=>setShowFilter((prev)=> !prev)} className={`btn-hover px-4 py-2 flex items-center gap-2 border rounded-xl ${showFilter? "border-[#2461E6] dark:border-[#73FBFD] bg-blue-100 dark:bg-gray-950": "border-[#EAECEF] bg-white dark:border-[#575757] dark:bg-[#575757]"} `}>
               <ListFilter className={`size-5  ${showFilter?"text-[#2461E6] dark:text-[#73FBFD]" : "text-[#082A44] dark:text-[#B2B2B2]"} `} />
               <h1 className={`text-sm  ${showFilter?"text-[#2461E6] dark:text-[#73FBFD]" : "text-[#082A44] dark:text-[#B2B2B2]"}  font-semibold`}>
                 Filter

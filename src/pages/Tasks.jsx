@@ -90,7 +90,7 @@ const ListRow = ({ task, onOpen, onDelete }) => {
       <td className="py-3 px-3">
         <button
           onClick={(e) => { e.stopPropagation(); onDelete(task._id); }}
-          className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+          className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 btn-hover"
         >
           <Trash2 className="w-3.5 h-3.5" />
         </button>
@@ -226,7 +226,7 @@ const Tasks = () => {
           <button
             id="create-task-btn"
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 px-5 py-2.5 bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black text-sm font-semibold rounded-2xl hover:bg-blue-700 dark:hover:bg-[#5af4f5] transition-colors shadow-sm"
+            className="flex items-center gap-2 px-5 py-2.5 bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black text-sm font-semibold rounded-2xl hover:bg-blue-700 dark:hover:bg-[#5af4f5] transition-colors shadow-sm btn-hover"
           >
             <Plus className="w-4 h-4" />
             New Task
@@ -262,7 +262,7 @@ const Tasks = () => {
               <button
                 key={p}
                 onClick={() => setPriorityFilter(p)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg capitalize transition-all ${
+                className={`btn-hover px-3 py-1.5 text-xs font-semibold rounded-lg capitalize ${
                   priorityFilter === p
                     ? "bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black"
                     : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-[#2d2f33]"
@@ -278,7 +278,7 @@ const Tasks = () => {
             <button
               id="kanban-view-btn"
               onClick={() => setView("kanban")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+              className={`btn-hover flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg ${
                 view === "kanban"
                   ? "bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black"
                   : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-[#2d2f33]"
@@ -290,7 +290,7 @@ const Tasks = () => {
             <button
               id="list-view-btn"
               onClick={() => setView("list")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+              className={`btn-hover flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg ${
                 view === "list"
                   ? "bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black"
                   : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-[#2d2f33]"

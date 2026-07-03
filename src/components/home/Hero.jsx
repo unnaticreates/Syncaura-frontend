@@ -34,7 +34,7 @@ const Hero = () => {
             <div className="flex justify-center md:justify-start gap-3 pt-6">
               <Link to="/sign-up">
                 <button
-                  className="px-8 md:px-5 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity w-full md:w-auto"
+                  className="px-8 md:px-5 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity w-full md:w-auto btn-hover"
                   style={{
                     backgroundColor: 'var(--accent-color)',
                     color: 'var(--bg-primary)'
@@ -46,7 +46,7 @@ const Hero = () => {
 
               <button
                 onClick={scrollToFeatures}
-                className="px-8 md:px-5 py-2.5 border text-sm font-medium hover:opacity-70 transition-opacity"
+                className="px-8 md:px-5 py-2.5 border text-sm font-medium hover:opacity-70 transition-opacity btn-hover"
                 style={{
                   borderColor: 'var(--border-color)',
                   color: 'var(--text-primary)'

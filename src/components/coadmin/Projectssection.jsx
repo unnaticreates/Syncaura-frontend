@@ -159,7 +159,7 @@ function ActionMenu({ projectName, onClose }) {
         <button
           key={a.label}
           onClick={() => { alert(`${a.label.split(" ")[1]}: ${projectName}`); onClose(); }}
-          className="w-full text-left px-4 py-2 text-[13px] hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors border-0 bg-transparent cursor-pointer"
+          className="w-full text-left px-4 py-2 text-[13px] hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors border-0 bg-transparent cursor-pointer btn-hover"
           style={{ color: a.color }}
         >
           {a.label}
@@ -298,7 +298,7 @@ export default function ProjectsSection() {
           {/* ✅ "View Details" scrolls to the All Projects table */}
           <button
             onClick={() => tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-            className="text-xs text-blue-500 cursor-pointer font-medium bg-transparent border-0 hover:underline"
+            className="text-xs text-blue-500 cursor-pointer font-medium bg-transparent border-0 hover:underline btn-hover"
           >
             View Details ↓
           </button>
@@ -377,8 +377,7 @@ export default function ProjectsSection() {
               <button
                 key={v}
                 onClick={() => setTimelineView(v)}
-                className={`px-4 py-1.5 text-xs font-semibold border-0 cursor-pointer transition-all
-                  ${timelineView === v
+                className={`btn-hover px-4 py-1.5 text-xs font-semibold border-0 cursor-pointer ${timelineView === v
                     ? "bg-slate-800 text-white"
                     : "bg-white dark:bg-[#1c1c1e] text-slate-400 hover:text-slate-600 dark:text-slate-300"}`}
               >
@@ -427,7 +426,7 @@ export default function ProjectsSection() {
       >
         <div className="flex justify-between items-center mb-3">
           <span className="text-[15px] font-bold text-slate-700 dark:text-slate-200">All Projects</span>
-          <button className="bg-transparent border-0 cursor-pointer text-slate-400 text-xl leading-none tracking-widest">···</button>
+          <button className="bg-transparent border-0 cursor-pointer text-slate-400 text-xl leading-none tracking-widest btn-hover">···</button>
         </div>
 
         {/* Desktop Table View */}
@@ -478,7 +477,7 @@ export default function ProjectsSection() {
                   <td className="px-2 py-3" style={{ position: "relative" }}>
                     <button
                       onClick={() => setOpenMenuIdx(openMenuIdx === i ? null : i)}
-                      className="bg-transparent border-0 cursor-pointer text-slate-400 text-lg leading-none hover:text-slate-600 dark:text-slate-300 transition-colors"
+                      className="bg-transparent border-0 cursor-pointer text-slate-400 text-lg leading-none hover:text-slate-600 dark:text-slate-300 transition-colors btn-hover"
                     >
                       ⋮
                     </button>
@@ -512,7 +511,7 @@ export default function ProjectsSection() {
                   {p.health === "😟" && <Frown size={22} className="text-red-500" />}
                   <button
                     onClick={() => setOpenMenuIdx(openMenuIdx === i ? null : i)}
-                    className="bg-transparent border-0 cursor-pointer text-slate-400 text-lg p-1"
+                    className="bg-transparent border-0 cursor-pointer text-slate-400 text-lg p-1 btn-hover"
                   >⋮</button>
                 </div>
               </div>
@@ -552,7 +551,7 @@ export default function ProjectsSection() {
             <button
               disabled={currentPage === 1}
               onClick={() => { setCurrentPage((p) => p - 1); setOpenMenuIdx(null); }}
-              className="px-3.5 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c1c1e] text-[12px] text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-3.5 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c1c1e] text-[12px] text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed btn-hover"
             >
               Prev
             </button>
@@ -561,8 +560,7 @@ export default function ProjectsSection() {
               <button
                 key={idx}
                 onClick={() => { setCurrentPage(idx + 1); setOpenMenuIdx(null); }}
-                className={`w-7 h-7 rounded-md text-[12px] font-semibold border transition-colors cursor-pointer
-                  ${currentPage === idx + 1
+                className={`btn-hover w-7 h-7 rounded-md text-[12px] font-semibold border transition-colors cursor-pointer ${currentPage === idx + 1
                     ? "bg-slate-800 text-white border-slate-800"
                     : "bg-white dark:bg-[#1c1c1e] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)]"}`}
               >
@@ -572,7 +570,7 @@ export default function ProjectsSection() {
             <button
               disabled={currentPage === totalPages}
               onClick={() => { setCurrentPage((p) => p + 1); setOpenMenuIdx(null); }}
-              className="px-3.5 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c1c1e] text-[12px] text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-3.5 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c1c1e] text-[12px] text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-50 dark:bg-[rgba(46,47,47,0.5)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed btn-hover"
             >
               Next
             </button>
@@ -610,7 +608,7 @@ export default function ProjectsSection() {
                 {/* ✅ Dismiss button */}
                 <button
                   onClick={() => dismissAlert(alert.id)}
-                  className="text-slate-300 hover:text-slate-500 dark:text-slate-400 text-lg leading-none bg-transparent border-0 cursor-pointer flex-shrink-0 mt-0.5 transition-colors"
+                  className="text-slate-300 hover:text-slate-500 dark:text-slate-400 text-lg leading-none bg-transparent border-0 cursor-pointer flex-shrink-0 mt-0.5 transition-colors btn-hover"
                   title="Dismiss"
                 >
                   ×
@@ -623,7 +621,7 @@ export default function ProjectsSection() {
               <div className="flex items-center">
                 <button
                   onClick={handleViewAllAlerts}
-                  className="bg-slate-600 hover:bg-slate-700 text-white text-[12px] font-semibold h-[80px] px-5 transition-colors whitespace-nowrap cursor-pointer border-0"
+                  className="bg-slate-600 hover:bg-slate-700 text-white text-[12px] font-semibold h-[80px] px-5 transition-colors whitespace-nowrap cursor-pointer border-0 btn-hover"
                 >
                   View all<br />notifications
                 </button>

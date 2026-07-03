@@ -191,7 +191,7 @@ const SignIn = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword((p) => !p)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 btn-hover"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -211,7 +211,7 @@ const SignIn = () => {
               <button
                 type="submit"
                 disabled={isSubmitting || isLoading}
-                className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition-all text-white py-3 rounded-xl shadow-md flex items-center justify-center gap-2 cursor-pointer font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl shadow-md flex items-center justify-center gap-2 cursor-pointer font-semibold disabled:opacity-60 disabled:cursor-not-allowed btn-hover"
               >
                 {isSubmitting || isLoading ? (
                   <>
@@ -236,7 +236,7 @@ const SignIn = () => {
                 id="google-login-btn"
                 type="button"
                 onClick={handleGoogleLogin}
-                className="flex items-center gap-2 border border-gray-200 dark:border-gray-600 px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
+                className="flex items-center gap-2 border border-gray-200 dark:border-gray-600 px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm text-gray-700 dark:text-gray-300 cursor-pointer btn-hover"
               >
                 <FcGoogle size={18} />
                 <span>Google</span>
@@ -246,7 +246,7 @@ const SignIn = () => {
                 id="github-login-btn"
                 type="button"
                 onClick={handleGithubLogin}
-                className="flex items-center gap-2 border border-gray-200 dark:border-gray-600 px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
+                className="flex items-center gap-2 border border-gray-200 dark:border-gray-600 px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm text-gray-700 dark:text-gray-300 cursor-pointer btn-hover"
               >
                 <FaGithub size={18} />
                 <span>GitHub</span>
@@ -254,7 +254,7 @@ const SignIn = () => {
 
               <button
                 type="button"
-                className="flex items-center gap-2 border border-gray-200 dark:border-gray-600 px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
+                className="flex items-center gap-2 border border-gray-200 dark:border-gray-600 px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm text-gray-700 dark:text-gray-300 cursor-pointer btn-hover"
               >
                 <FaFacebook size={18} className="text-blue-600" />
                 <span>Facebook</span>

@@ -53,19 +53,10 @@ export default function FilterTabs({ activeFilter, setActiveFilter }) {
   
               <button
                 onClick={() => setActiveFilter(item.key)}
-                className={`
-                  relative z-10
-                  px-4 py-1.5
-                  text-[13px]
-                  font-medium
-                  rounded-full
-                  whitespace-nowrap
-                  transition
-                  ${isActive
+                className={`btn-hover relative z-10 px-4 py-1.5 text-[13px] font-medium rounded-full whitespace-nowrap transition ${isActive
                     ? "text-white dark:text-black"
                     : "text-[#4b5563] dark:text-[#d1d5db]"
-                  }
-                `}
+                  } `}
               >
                 {item.label}
               </button>

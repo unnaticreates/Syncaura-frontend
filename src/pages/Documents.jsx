@@ -101,7 +101,7 @@ export default function Documents() {
             <button
               onClick={() => setSelectedTab(item)}
               key={item}
-              className={`flex items-center border justify-center py-2 w-32 ${
+              className={`btn-hover flex items-center border justify-center py-2 w-32 ${
                 selectedTab === item
                   ? "bg-[#EFF6FF] dark:bg-[#344343] border-[#DBEAFE] dark:border-[#73FBFD] text-[#1D6BE3] dark:text-[#73FBFD]"
                   : "border-[#EAECEF] text-[#989696] cursor-pointer"
@@ -115,7 +115,7 @@ export default function Documents() {
         <div className="flex items-center relative md:static justify-center md:justify-end flex-nowrap gap-5 px-2 sm:px-7 w-full sm:w-auto">
           <button
             onClick={() => setShowFilter((prev) => !prev)}
-            className={`px-4 py-2 bg-white dark:bg-[#292828] flex items-center gap-2 border rounded-xl ${
+            className={`btn-hover px-4 py-2 bg-white dark:bg-[#292828] flex items-center gap-2 border rounded-xl ${
               showFilter ? "border-[#2461E6] dark:border-[#73FBFD]" : "border-[#EAECEF] dark:border-[#575757]"
             }`}
           >
@@ -197,7 +197,7 @@ export default function Documents() {
                       ...filteredDocuments.slice(prev.length, prev.length + 8),
                     ]);
                   }}
-                  className="flex items-center justify-center text-[#C05328] text-xl hover:underline"
+                  className="flex items-center justify-center text-[#C05328] text-xl hover:underline btn-hover"
                 >
                   View All Reports and Documents
                 </button>
@@ -209,7 +209,7 @@ export default function Documents() {
 
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-8 right-8 flex items-center gap-2 rounded-full bg-blue-600 dark:bg-[#73FBFD] dark:text-black transition duration-500 px-6 py-3 text-white shadow-lg hover:bg-blue-400 dark:hover:bg-[#2cc4c7]"
+        className="fixed bottom-8 right-8 flex items-center gap-2 rounded-full bg-blue-600 dark:bg-[#73FBFD] dark:text-black transition duration-500 px-6 py-3 text-white shadow-lg hover:bg-blue-400 dark:hover:bg-[#2cc4c7] btn-hover"
       >
         <Plus size={18} />
         New Report

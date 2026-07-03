@@ -87,7 +87,7 @@ const TaskDetailModal = ({ task, onClose, onDeleted }) => {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2d2f33] transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#2d2f33] transition-colors btn-hover"
           >
             <X className="w-4 h-4" />
           </button>
@@ -130,9 +130,9 @@ const TaskDetailModal = ({ task, onClose, onDeleted }) => {
                   key={opt.value}
                   onClick={() => handleStatusChange(opt.value)}
                   disabled={statusLoading}
-                  className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all ${
+                  className={`btn-hover flex-1 py-2 text-xs font-semibold rounded-xl ${
                     task.status === opt.value
-                      ? opt.color + " ring-2 ring-offset-1 ring-current"
+                      ? opt.color + "ring-2 ring-offset-1 ring-current"
                       : "bg-gray-100 dark:bg-[#2d2f33] text-gray-400 dark:text-gray-500 hover:opacity-80"
                   } disabled:opacity-60`}
                 >
@@ -196,7 +196,7 @@ const TaskDetailModal = ({ task, onClose, onDeleted }) => {
               <button
                 onClick={handleAddSubtask}
                 disabled={addingSubtask || !subtaskInput.trim()}
-                className="p-2 rounded-xl bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black hover:bg-blue-700 dark:hover:bg-[#5af4f5] transition-colors disabled:opacity-50"
+                className="p-2 rounded-xl bg-[#2457C5] dark:bg-[#73FBFD] text-white dark:text-black hover:bg-blue-700 dark:hover:bg-[#5af4f5] transition-colors disabled:opacity-50 btn-hover"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -209,7 +209,7 @@ const TaskDetailModal = ({ task, onClose, onDeleted }) => {
           {!confirmDelete ? (
             <button
               onClick={() => setConfirmDelete(true)}
-              className="flex items-center gap-1.5 text-sm text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors"
+              className="flex items-center gap-1.5 text-sm text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors btn-hover"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Delete Task
@@ -220,13 +220,13 @@ const TaskDetailModal = ({ task, onClose, onDeleted }) => {
               <span className="text-sm text-gray-600 dark:text-gray-400 flex-1">Delete this task?</span>
               <button
                 onClick={() => setConfirmDelete(false)}
-                className="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                className="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors btn-hover"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
-                className="text-sm font-semibold text-red-500 hover:text-red-700 transition-colors"
+                className="text-sm font-semibold text-red-500 hover:text-red-700 transition-colors btn-hover"
               >
                 Delete
               </button>

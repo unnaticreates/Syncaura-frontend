@@ -100,7 +100,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 flex items-center justify-center rounded-md transition-all hover:opacity-70"
+            className="w-9 h-9 flex items-center justify-center rounded-md hover:opacity-70 btn-hover"
             aria-label="Toggle theme"
           >
             {theme === 'light' ? (
@@ -118,7 +118,7 @@ const Navbar = () => {
 
           <Link to="/sign-up">
             <button
-              className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+              className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity btn-hover"
               style={{
                 backgroundColor: "var(--accent-color)",
                 color: "var(--bg-primary)",
@@ -140,7 +140,7 @@ const Navbar = () => {
           
           <Link to="/sign-up">
             <button
-              className="px-4 py-1 text-[13px] font-medium rounded-[10px]"
+              className="px-4 py-1 text-[13px] font-medium rounded-[10px] btn-hover"
               style={{
                 backgroundColor: "var(--accent-color)",
                 color: "var(--bg-primary)",

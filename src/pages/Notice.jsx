@@ -75,7 +75,7 @@ const Notice = () => {
         <div className="flex-1/3 flex items-center justify-center sm:justify-end gap-2">
           <button
             onClick={() => setShowFilter((prev) => !prev)}
-            className={`flex-1/4 flex items-center justify-center w-full px-5 py-1 gap-2 border rounded-4xl ${showFilter ? "border-[#2461E6] dark:border-[#73FBFD]" : "border-[#989696] dark:border-[#FFFFFF]"}`}
+            className={`btn-hover flex-1/4 flex items-center justify-center w-full px-5 py-1 gap-2 border rounded-4xl ${showFilter ? "border-[#2461E6] dark:border-[#73FBFD]" : "border-[#989696] dark:border-[#FFFFFF]"}`}
           >
             <Funnel className={`size-5 ${showFilter ? "text-[#2461E6] dark:text-[#73FBFD]" : "text-[#082A44] dark:text-[#B2B2B2]"}`} />
             <span className={`text-lg ${showFilter ? "text-[#2461E6] dark:text-[#73FBFD]" : "text-[#575757] dark:text-[#FFFFFF]"}`}>Filter</span>
@@ -135,7 +135,7 @@ const Notice = () => {
               <div className="w-full flex items-center justify-center mt-4">
                 <button
                   onClick={() => setFewNotification((prev) => [...prev, ...filteredNotice.slice(prev.length, prev.length + 7)])}
-                  className="flex items-center justify-center text-[#C05328] text-xl hover:underline"
+                  className="flex items-center justify-center text-[#C05328] text-xl hover:underline btn-hover"
                 >
                   View All Notices
                 </button>
@@ -147,7 +147,7 @@ const Notice = () => {
 
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-8 right-8 flex items-center gap-2 rounded-full bg-blue-600 dark:bg-[#73FBFD] dark:text-black transition duration-500 px-6 py-3 text-white shadow-lg hover:bg-blue-400 dark:hover:bg-[#2cc4c7]"
+        className="fixed bottom-8 right-8 flex items-center gap-2 rounded-full bg-blue-600 dark:bg-[#73FBFD] dark:text-black transition duration-500 px-6 py-3 text-white shadow-lg hover:bg-blue-400 dark:hover:bg-[#2cc4c7] btn-hover"
       >
         <Plus size={18} />
         New Notice

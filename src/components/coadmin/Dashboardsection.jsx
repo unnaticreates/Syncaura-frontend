@@ -330,7 +330,7 @@ export default function DashboardSection() {
           <span className="font-bold text-slate-500 dark:text-slate-400">Project Progress Overview</span>
           <button
             onClick={() => setViewDetailsOpen(v => !v)}
-            className="text-xs text-blue-500 cursor-pointer border-0 bg-transparent hover:text-blue-700 transition-colors font-medium btn-press"
+            className="text-xs text-blue-500 cursor-pointer border-0 bg-transparent hover:text-blue-700 transition-colors font-medium btn-press btn-hover"
           >
             {viewDetailsOpen ? "Hide Details ▲" : "View Details ▼"}
           </button>
@@ -380,8 +380,7 @@ export default function DashboardSection() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-3 py-1 text-[11px] font-semibold rounded-md transition-all cursor-pointer border-0 btn-press
-                  ${activeTab === tab
+                className={`btn-hover px-3 py-1 text-[11px] font-semibold rounded-md cursor-pointer border-0 btn-press ${activeTab === tab
                     ? "bg-white dark:bg-[#1c1c1e] text-slate-800 dark:text-white shadow-sm"
                     : "bg-transparent text-slate-400 hover:text-slate-600 dark:text-slate-300"
                   }`}
@@ -517,7 +516,7 @@ export default function DashboardSection() {
           {/* View All Button */}
           <div className="flex-shrink-0 flex items-stretch">
             <button
-              className="bg-[#94a3b8] hover:bg-slate-500 text-white rounded-xl text-[12px] font-bold cursor-pointer border-0 w-full md:w-[65px] flex md:flex-col items-center justify-center gap-2 md:gap-1 transition-all btn-press py-3 md:py-0"
+              className="bg-[#94a3b8] hover:bg-slate-500 text-white rounded-xl text-[12px] font-bold cursor-pointer border-0 w-full md:w-[65px] flex md:flex-col items-center justify-center gap-2 md:gap-1 btn-press py-3 md:py-0 btn-hover"
             >
               <span className="leading-none text-center">View<br className="hidden md:block"/>All</span>
               <span className="text-sm md:text-sm font-black">12</span>

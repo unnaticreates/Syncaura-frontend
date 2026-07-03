@@ -34,7 +34,7 @@ const WorkflowSection = () => {
 
             {/* Buttons */}
             <div className="flex gap-3">
-              <button className="flex-1 md:flex-none md:px-6 lg:px-10 py-2.5 lg:py-3 text-sm lg:text-lg font-medium  hover:opacity-90 transition-opacity" style={{
+              <button className="flex-1 md:flex-none md:px-6 lg:px-10 py-2.5 lg:py-3 text-sm lg:text-lg font-medium hover:opacity-90 transition-opacity btn-hover" style={{
                 backgroundColor: 'var(--accent-color)',
                 color: 'var(--bg-primary)'
               }}>
@@ -42,7 +42,7 @@ const WorkflowSection = () => {
               </button>
               <button
                 onClick={scrollToFeatures}
-                className="flex-1 md:flex-none md:px-6 lg:px-10 py-2.5 lg:py-3 border text-sm lg:text-lg font-medium  hover:opacity-70 transition-opacity"
+                className="flex-1 md:flex-none md:px-6 lg:px-10 py-2.5 lg:py-3 border text-sm lg:text-lg font-medium hover:opacity-70 transition-opacity btn-hover"
                 style={{
                   borderColor: 'var(--accent-color)',
                   color: 'var(--accent-color)',

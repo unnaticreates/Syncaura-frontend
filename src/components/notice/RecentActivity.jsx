@@ -31,7 +31,7 @@ export default function RecentActivity() {
 
           <button
             onClick={() => setShowAll(!showAll)}
-            className="text-sm px-5 py-2 font-medium rounded-2xl text-[#E3264A] hover:underline bg-[#FEE2E2]"
+            className="text-sm px-5 py-2 font-medium rounded-2xl text-[#E3264A] hover:underline bg-[#FEE2E2] btn-hover"
           >
             {showAll ? "View Less" : "View All"}
           </button>

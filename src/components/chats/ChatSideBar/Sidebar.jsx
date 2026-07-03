@@ -259,7 +259,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setShowMenu(!showMenu)}
-              className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors btn-hover"
             >
               <MoreVertical className="size-7 text-black dark:text-white" />
             </button>
@@ -269,7 +269,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
               <div className="absolute right-0 top-10 md:left-0 md:top-10 w-[200px] bg-white dark:bg-[#2E2F2F] border border-[#D1D1D1] dark:border-[#575757] rounded-xl shadow-lg py-1.5 z-50">
                 <button
                   onClick={() => handleMenuItemClick("chat")}
-                  className={`w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
+                  className={`btn-hover w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
                     currentView === "chat" ? "bg-[#F5F5F5] dark:bg-gray-700" : ""
                   }`}
                 >
@@ -281,7 +281,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
 
                 <button
                   onClick={() => handleMenuItemClick("archived")}
-                  className={`w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
+                  className={`btn-hover w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
                     currentView === "archived" ? "bg-[#F5F5F5] dark:bg-gray-700" : ""
                   }`}
                 >
@@ -293,7 +293,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
 
                 <button
                   onClick={() => handleMenuItemClick("starred")}
-                  className={`w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
+                  className={`btn-hover w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
                     currentView === "starred" ? "bg-[#F5F5F5] dark:bg-gray-700" : ""
                   }`}
                 >
@@ -305,7 +305,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
 
                 <button
                   onClick={() => handleMenuItemClick("select")}
-                  className={`w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
+                  className={`btn-hover w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors ${
                     selectMode ? "bg-[#F5F5F5] dark:bg-gray-700" : ""
                   }`}
                 >
@@ -318,7 +318,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
 
                 <button
                   onClick={() => handleMenuItemClick("markAllRead")}
-                  className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors"
+                  className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-[#000000] dark:text-white text-base flex items-center gap-3 transition-colors btn-hover"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="flex-shrink-0">
                     <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -339,7 +339,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
                   setSelectMode(false);
                   setSelectedChats([]);
                 }}
-                className="text-black dark:text-white text-lg font-medium"
+                className="text-black dark:text-white text-lg font-medium btn-hover"
               >
                 ✕
               </button>
@@ -352,7 +352,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
             <div className="relative" ref={selectMenuRef}>
               <button
                 onClick={() => setShowSelectMenu(!showSelectMenu)}
-                className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg"
+                className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg btn-hover"
               >
                 <MoreVertical className="size-6 text-black dark:text-white" />
               </button>
@@ -363,7 +363,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
   {/* Mark as read */}
   <button
     onClick={() => handleSelectMenuAction("markAsRead")}
-    className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3 transition-colors"
+    className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3 transition-colors btn-hover"
   >
     <BookmarkCheck size={18} className="flex-shrink-0" />
     Mark as read
@@ -372,7 +372,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
   {/* Mute notification */}
   <button
     onClick={() => handleSelectMenuAction("mute")}
-    className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3 transition-colors"
+    className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3 transition-colors btn-hover"
   >
     <BellOff size={18} className="flex-shrink-0" />
     Mute Notification
@@ -381,7 +381,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
   {/* Clear selected chat */}
   <button
     onClick={() => handleSelectMenuAction("clearSelected")}
-    className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3 transition-colors"
+    className="w-full text-left px-4 py-2.5 hover:bg-[#F5F5F5] dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3 transition-colors btn-hover"
   >
     <CircleMinus size={18} className="flex-shrink-0" />
     Clear Selected chat
@@ -479,12 +479,7 @@ export default function Sidebar({ chats, selectedChat, onSelect, onViewChange })
 
       {/* Floating circular Edit button inside sidebar */}
       <button
-        className="absolute bottom-4 right-4
-          w-12 h-12 rounded-full
-          bg-blue-600 dark:bg-[#73FBFD]
-          flex items-center justify-center
-          text-white dark:text-black
-          shadow-lg hover:scale-105 transition-transform"
+        className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-blue-600 dark:bg-[#73FBFD] flex items-center justify-center text-white dark:text-black shadow-lg hover:scale-105 transition-transform btn-hover"
       >
         <Edit3 size={20} />
       </button>

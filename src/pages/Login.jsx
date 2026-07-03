@@ -71,7 +71,7 @@ export default function Login() {
                 placeholder="Enter your password"
                 style={styles.input}
               />
-              <button
+              <button className="btn-hover"
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
                 style={styles.eyeBtn}
@@ -88,7 +88,7 @@ export default function Login() {
             </a>
           </div>
 
-          <button type="submit" style={styles.primaryBtn}>
+          <button className="btn-hover" type="submit" style={styles.primaryBtn}>
             Login
           </button>
 
@@ -98,7 +98,7 @@ export default function Login() {
             <span style={styles.dividerLine} />
           </div>
 
-          <button type="button" style={styles.googleBtn}>
+          <button className="btn-hover" type="button" style={styles.googleBtn}>
             <GoogleIcon />
             <span>Continue with Google</span>
           </button>

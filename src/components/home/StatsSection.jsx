@@ -39,14 +39,14 @@ const StatsSection = () => {
 
         {/* Buttons */}
         <div className="flex items-center gap-4 mb-12 pt-2 md:mb-16">
-          <button className="px-6 py-3 border text-md font-medium hover:opacity-70 transition-opacity" style={{ 
+          <button className="px-6 py-3 border text-md font-medium hover:opacity-70 transition-opacity btn-hover" style={{ 
             borderColor: 'var(--border-color)',
             backgroundColor: 'var(--bg-primary)',
             color: 'var(--text-secondary)' 
           }}>
             Learn
           </button>
-          <button className="flex items-center gap-2 text-md font-medium hover:opacity-70 transition-opacity" style={{ 
+          <button className="flex items-center gap-2 text-md font-medium hover:opacity-70 transition-opacity btn-hover" style={{ 
             color: 'var(--text-secondary)' 
           }}>
             <span>Arrow</span>

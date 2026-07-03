@@ -74,7 +74,7 @@ export default function MobileSidebar({ open, setOpen }) {
   `}
             >
                 <div className="flex lg:hidden items-center justify-between px-4 py-4">
-                    <button onClick={() => setOpen(false)}>
+                    <button className="btn-hover" onClick={() => setOpen(false)}>
                         <X size={20} className="text-[#000000] dark:text-[#F8F8F8]" />
                     </button>
                 </div>
@@ -129,7 +129,7 @@ export default function MobileSidebar({ open, setOpen }) {
 
                 <div className="flex flex-col gap-5 px-4 py-4">
                     <div className="h-px w-full bg-[#E0DDDD] dark:bg-[#575757]" />
-                    <button onClick={() => logOutHandle()} className="flex cursor-pointer items-center justify-center gap-5 w-full">
+                    <button onClick={() => logOutHandle()} className="flex cursor-pointer items-center justify-center gap-5 w-full btn-hover">
                         <LogOut className="size-6 text-[#FF0000]" />
                         <h2 className="text-[#FF0000] text-xl font-semibold" >Log Out</h2>
 

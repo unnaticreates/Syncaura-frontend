@@ -55,7 +55,7 @@ const Newsletter = () => {
           />
           <button 
             onClick={handleSubmit}
-            className="px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity whitespace-nowrap" 
+            className="px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity whitespace-nowrap btn-hover" 
             style={{ 
               backgroundColor: 'var(--accent-color)',
               color: "var(--bg-primary)"

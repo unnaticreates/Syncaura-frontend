@@ -138,7 +138,7 @@ export default function ChatInput() {
 
       {/* Mic Button */}
       <button
-        className="bg-blue-600 dark:bg-[#73FBFD] p-3 md:p-4 rounded-full"
+        className="bg-blue-600 dark:bg-[#73FBFD] p-3 md:p-4 rounded-full btn-hover"
         disabled={uploading}
       >
         {uploading ? (

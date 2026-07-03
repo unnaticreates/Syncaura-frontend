@@ -88,7 +88,7 @@ const LeaveModel = ({ onClose, setHistory }) => {
                         </div>
                         <button
                             onClick={onClose}
-                            className=" text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+                            className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white btn-hover"
                         >
                             <X className="size-7" />
                         </button>
@@ -186,7 +186,7 @@ const LeaveModel = ({ onClose, setHistory }) => {
                             </div>
                         </div>
                         <div className="flex items-center justify-center mt-5 w-full">
-                            <button type="submit" className="flex cursor-pointer items-center justify-center bg-[#2461E6] dark:bg-[#73FBFD] px-7 py-2 rounded-4xl ">
+                            <button type="submit" className="flex cursor-pointer items-center justify-center bg-[#2461E6] dark:bg-[#73FBFD] px-7 py-2 rounded-4xl btn-hover">
                                 <p className="dark:text-[#2E2F2F] text-[#FFFFFF] text-lg font-medium" >Apply Leave</p>
                             </button>
                         </div>

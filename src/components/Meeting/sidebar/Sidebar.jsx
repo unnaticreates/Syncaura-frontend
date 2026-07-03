@@ -159,7 +159,7 @@ export default function Sidebar({ open, setOpen }) {
               {/* Close Button */}
               <button
                 onClick={() => setOpen(false)}
-                className="p-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors"
+                className="p-0.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors btn-hover"
                 aria-label="Close menu"
               >
                 <X className="w-6 h-6 text-black dark:text-gray-400" strokeWidth={2} />
@@ -177,16 +177,11 @@ export default function Sidebar({ open, setOpen }) {
                 <button
                   key={index}
                   onClick={() => handleNavigation(item.path)}
-                  className={`
-                    w-full flex items-center gap-4 px-4 py-2
-                    transition-colors duration-150
-                    relative
-                    ${
+                  className={`btn-hover w-full flex items-center gap-4 px-4 py-2 transition-colors duration-150 relative ${
                       active
                         ? "bg-[#E8EEFF] dark:bg-[#1E293B]"
                         : "hover:bg-gray-50 dark:hover:bg-[#252525]"
-                    }
-                  `}
+                    } `}
                 >
                   <div className={`
                     flex-shrink-0
@@ -225,9 +220,7 @@ export default function Sidebar({ open, setOpen }) {
       // add your logout logic here
       setOpen(false);
     }}
-    className="w-full flex items-center justify-center gap-3 py-2.5
-               rounded-lg transition-colors
-               hover:bg-red-50 dark:hover:bg-red-950/20"
+    className="w-full flex items-center justify-center gap-3 py-2.5 rounded-lg transition-colors hover:bg-red-50 dark:hover:bg-red-950/20 btn-hover"
   >
     <LogOut className="w-5 h-5 text-[#EF4444]" />
     <span className="text-[#EF4444] font-semibold text-base">

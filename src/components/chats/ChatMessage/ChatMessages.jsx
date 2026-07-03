@@ -113,7 +113,7 @@ export default function ChatMessages({ viewMode = "chat", currentChat }) {
               {/* Star button - shows on hover */}
               <button
                 onClick={() => toggleStar(message.id)}
-                className={`absolute ${
+                className={`btn-hover absolute ${
                   message.isOwn ? "left-2" : "right-2"
                 } top-1 opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700`}
               >

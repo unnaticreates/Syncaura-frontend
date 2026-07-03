@@ -96,7 +96,7 @@ const CreateNewProject = ({ onClose }) => {
                             <h1 className="text-2xl text-[#000000] dark:text-[#FFFFFF] font-bold">New Project</h1>
                             <button
                                 onClick={onClose}
-                                className="absolute right-4 top-4 text-gray-600 dark:text-[#898888] hover:text-black dark:hover:text-white"
+                                className="absolute right-4 top-4 text-gray-600 dark:text-[#898888] hover:text-black dark:hover:text-white btn-hover"
                             >
                                 <X className="size-7" />
                             </button>
@@ -271,9 +271,9 @@ const CreateNewProject = ({ onClose }) => {
                             <div className="flex items-center justify-end w-full">
                                 <div className="flex items-center justify-center gap-5 ">
                                     <div className="flex items-center justify-center ">
-                                        <button type="button" className="text-[#000000] dark:text-[#FFFFFF] text-base font-medium hover:underline " onClick={onClose} >Cancel</button>
+                                        <button type="button" className="text-[#000000] dark:text-[#FFFFFF] text-base font-medium hover:underline btn-hover" onClick={onClose} >Cancel</button>
                                     </div>
-                                    <button type="submit" className="flex items-center justify-center hover:bg-[#4277eb] bg-[#2461E6] rounded-3xl px-5 py-1.5 dark:bg-[#73FBFD] dark:hover:bg-[#14d3d6]  ">
+                                    <button type="submit" className="flex items-center justify-center hover:bg-[#4277eb] bg-[#2461E6] rounded-3xl px-5 py-1.5 dark:bg-[#73FBFD] dark:hover:bg-[#14d3d6] btn-hover">
                                         <p className=" text-[#EDEDED] dark:text-[#000000] text-base font-semibold" >Create Project</p>
                                     </button>
 
