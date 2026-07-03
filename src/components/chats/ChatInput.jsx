@@ -54,13 +54,11 @@ export default function ChatInput() {
         },
         onUploadProgress: (progressEvent) => {
           const percent = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
+            (progressEvent.loaded * 100) / progressEvent.total,
           );
-          console.log(`Upload: ${percent}%`);
         },
       });
 
-      console.log("Upload success:", res.data);
       alert("File uploaded successfully ✅");
     } catch (err) {
       console.error("Upload error:", err);
@@ -95,7 +93,6 @@ export default function ChatInput() {
       )}
 
       <div className="bg-[#FFFFFF] dark:bg-[#000000] grid grid-cols-20 border border-[#989696] dark:border-[#535353] rounded-2xl px-3 py-2 w-full">
-        
         {/* Emoji Button */}
         <div className="flex items-center justify-center col-span-1 cursor-pointer">
           <Smile

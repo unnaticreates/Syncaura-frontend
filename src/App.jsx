@@ -64,8 +64,6 @@ export default function App() {
     };
   }, [dispatch]);
 
-  console.log({ user, authChecking });
-
   if (authChecking) {
     return (
       <div
@@ -94,22 +92,29 @@ export default function App() {
       />
 
       <BrowserRouter>
-        <Suspense fallback={
-          <div className="w-full h-screen bg-white dark:bg-black flex items-center justify-center">
-            <Loader className="size-8 text-blue-600 dark:text-[#73FBFD] animate-spin duration-200" />
-          </div>
-        }>
+        <Suspense
+          fallback={
+            <div className="w-full h-screen bg-white dark:bg-black flex items-center justify-center">
+              <Loader className="size-8 text-blue-600 dark:text-[#73FBFD] animate-spin duration-200" />
+            </div>
+          }
+        >
           <Routes>
             <Route element={<ProtectRoute publicOnly />}>
               <Route path="/" element={<Home />} />
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
-              <Route path="/auth/github/callback" element={<GithubCallback />} />
+              <Route
+                path="/auth/github/callback"
+                element={<GithubCallback />}
+              />
             </Route>
 
             <Route
-              element={<ProtectRoute allowedRoles={["user", "admin", "co-admin"]} />}
+              element={
+                <ProtectRoute allowedRoles={["user", "admin", "co-admin"]} />
+              }
             >
               <Route path="/meet/:id" element={<CurrentMeet />} />
             </Route>
@@ -146,90 +151,90 @@ export default function App() {
                 }
               />
 
-            <Route
-              path="/projects"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <Projects />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/projects"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <Projects />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/attendance-leave"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <AttendanceLeave />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/attendance-leave"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <AttendanceLeave />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/tasks"
-              element={
-                <MainLayout TopbarComponent={Header}>
-                  <Tasks />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/tasks"
+                element={
+                  <MainLayout TopbarComponent={Header}>
+                    <Tasks />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/meetings"
-              element={
-                <MainLayout SideBar={MobileSidebar} TopbarComponent={Header}>
-                  <Meetings />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/meetings"
+                element={
+                  <MainLayout SideBar={MobileSidebar} TopbarComponent={Header}>
+                    <Meetings />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/chat"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <Chat />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/chat"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <Chat />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/notice"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <Notice />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/notice"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <Notice />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/documents"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <Documents />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/documents"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <Documents />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/complaints"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <Complaints />
-                </MainLayout>
-              }
-            />
+              <Route
+                path="/complaints"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <Complaints />
+                  </MainLayout>
+                }
+              />
 
-            <Route
-              path="/settings"
-              element={
-                <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
-                  <Settings />
-                </MainLayout>
-              }
-            />
-          </Route>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-  </>
-);
+              <Route
+                path="/settings"
+                element={
+                  <MainLayout TopbarComponent={Header} SideBar={MobileSidebar}>
+                    <Settings />
+                  </MainLayout>
+                }
+              />
+            </Route>
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </>
+  );
 }

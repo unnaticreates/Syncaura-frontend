@@ -23,12 +23,10 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
 
   const handlePhoneClick = (e) => {
     e.stopPropagation();
-    console.log("Phone clicked");
   };
 
   const handleSearchClick = (e) => {
     e.stopPropagation();
-    console.log("Search clicked");
   };
 
   const handleMoreClick = (e) => {
@@ -43,25 +41,21 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
 
   const handleMenuAction = (action) => {
     setShowMenu(false);
-    
+
     switch (action) {
       case "viewProfile":
         setOpen(true);
         break;
       case "muteNotifications":
-        console.log("Mute notifications for:", chat.name);
         // Add mute logic
         break;
       case "clearChat":
-        console.log("Clear chat for:", chat.name);
         // Add clear chat logic
         break;
       case "deleteChat":
-        console.log("Delete chat for:", chat.name);
         // Add delete chat logic
         break;
       case "blockUser":
-        console.log("Block user:", chat.name);
         // Add block user logic
         break;
     }
@@ -85,7 +79,9 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
           <p className="font-semibold text-lg text-black dark:text-white">
             {chat.name}
           </p>
-          <p className="text-sm text-black dark:text-white">Last seen yesterday</p>
+          <p className="text-sm text-black dark:text-white">
+            Last seen yesterday
+          </p>
         </div>
       </div>
 
@@ -93,7 +89,7 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
       <div className="flex gap-4 xl:gap-7 text-gray-600 dark:text-gray-400 relative">
         <Phone onClick={handlePhoneClick} className="cursor-pointer" />
         <Search onClick={handleSearchClick} className="cursor-pointer" />
-        
+
         {/* Three dot menu */}
         <div ref={menuRef}>
           <MoreVertical onClick={handleMoreClick} className="cursor-pointer" />
@@ -105,7 +101,9 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
                 onClick={() => handleMenuAction("viewProfile")}
                 className="w-full text-left px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3"
               >
-                <span className="size-5 flex items-center justify-center">👤</span>
+                <span className="size-5 flex items-center justify-center">
+                  👤
+                </span>
                 View Profile
               </button>
 
@@ -113,7 +111,9 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
                 onClick={() => handleMenuAction("muteNotifications")}
                 className="w-full text-left px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3"
               >
-                <span className="size-5 flex items-center justify-center">🔕</span>
+                <span className="size-5 flex items-center justify-center">
+                  🔕
+                </span>
                 Mute Notifications
               </button>
 
@@ -121,7 +121,9 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
                 onClick={() => handleMenuAction("clearChat")}
                 className="w-full text-left px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700 text-black dark:text-white text-base flex items-center gap-3"
               >
-                <span className="size-5 flex items-center justify-center">🗑️</span>
+                <span className="size-5 flex items-center justify-center">
+                  🗑️
+                </span>
                 Clear Chat
               </button>
 
@@ -129,7 +131,9 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
                 onClick={() => handleMenuAction("deleteChat")}
                 className="w-full text-left px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400 text-base flex items-center gap-3"
               >
-                <span className="size-5 flex items-center justify-center">❌</span>
+                <span className="size-5 flex items-center justify-center">
+                  ❌
+                </span>
                 Delete Chat
               </button>
 
@@ -139,7 +143,9 @@ export default function ChatHeader({ chat, onBack, setOpen }) {
                 onClick={() => handleMenuAction("blockUser")}
                 className="w-full text-left px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400 text-base flex items-center gap-3"
               >
-                <span className="size-5 flex items-center justify-center">🚫</span>
+                <span className="size-5 flex items-center justify-center">
+                  🚫
+                </span>
                 Block User
               </button>
             </div>

@@ -47,9 +47,6 @@ export const MediaProvider = ({ children }) => {
 
   // 🎤 Toggle Mic
   const toggleMic = () => {
-    console.log("Toggle Mic clicked");
-    console.log(localStream);
-
     if (!localStream) return;
 
     toggleAudioTrack(localStream, !isMicOn);
@@ -58,8 +55,6 @@ export const MediaProvider = ({ children }) => {
 
   // 📷 Toggle Camera
   const toggleCamera = () => {
-    console.log("Toggle Camera clicked");
-
     if (!localStream) return;
 
     toggleVideoTrack(localStream, !isCameraOn);
