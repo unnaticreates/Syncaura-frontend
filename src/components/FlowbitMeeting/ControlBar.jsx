@@ -97,17 +97,19 @@ const ControllBar = ({
 
           {/* SCREEN SHARE */}
           <button
-            onClick={() => {
+            onClick={async () => {
               if (isScreenSharing) {
                 stopScreenShare();
                 setParticipants((prev) =>
                   prev.map((p) => (p.isHost ? { ...p, isSharing: false } : p)),
                 );
               } else {
-                startScreenShare();
-                setParticipants((prev) =>
-                  prev.map((p) => (p.isHost ? { ...p, isSharing: true } : p)),
-                );
+                const started = await startScreenShare();
+                if (started) {
+                  setParticipants((prev) =>
+                    prev.map((p) => (p.isHost ? { ...p, isSharing: true } : p)),
+                  );
+                }
               }
             }}
             className={`w-15 h-11 rounded-full flex items-center justify-center transition

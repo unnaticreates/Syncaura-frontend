@@ -69,13 +69,19 @@ export const MediaProvider = ({ children }) => {
       setScreenStream(stream);
       setIsScreenSharing(true);
 
-      // When user clicks "Stop sharing" from browser popup
-      stream.getVideoTracks()[0].onended = () => {
-        stopScreenShare();
-      };
+      const track = stream.getVideoTracks()[0];
+
+      if (track) {
+        track.onended = () => {
+          stopScreenShare();
+        };
+      }
+      return true;
     } catch (err) {
       console.error("Screen share cancelled:", err);
       setIsScreenSharing(false);
+
+      return false;
     }
   };
 
