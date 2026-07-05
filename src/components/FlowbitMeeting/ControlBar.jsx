@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import MeetingTime from "./MeetingTime";
 
-const ControllBar = ({
+const ControlBar = ({
   controllerRef,
   isDarkTheme,
 
@@ -382,4 +382,4 @@ const ControllBar = ({
   );
 };
 
-export default React.memo(ControllBar);
+export default React.memo(ControlBar);

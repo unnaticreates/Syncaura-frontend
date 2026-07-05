@@ -8,7 +8,7 @@ import {
   updateUserProfile,
 } from "../features/authThunks";
 
-const token = localStorage.getItem("accessToken") || localStorage.getItem("token");
+const storedToken = localStorage.getItem("accessToken") || localStorage.getItem("token");
 
 const initialState = {
   user: null,
@@ -46,7 +46,6 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      localStorage.removeItem("token");
       state.isLoading = false;
     },
   },
