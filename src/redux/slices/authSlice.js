@@ -12,10 +12,10 @@ const storedToken = localStorage.getItem("accessToken") || localStorage.getItem(
 
 const initialState = {
   user: null,
-  token: token,
+  token: storedToken,
   isLoading: false,
   error: null,
-  isAuthenticated: !!token,
+  isAuthenticated: !!storedToken,
   authChecking: true,
   profileLoading: false,
 };
