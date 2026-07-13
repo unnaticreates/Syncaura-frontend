@@ -146,16 +146,16 @@ const Navbar = () => {
             )}
           </button>
 
-        <button
-    onClick={() => navigate("/signin")}
-  className="text-sm font-medium hover:opacity-80 transition-opacity"
-  style={{ color: "var(--accent-color)" }}
->
-  Login
-</button>
+          <button
+            onClick={() => navigate("/sign-in")}
+            className="text-sm font-medium hover:opacity-80 transition-opacity"
+            style={{ color: 'var(--accent-color)' }}
+          >
+            Login
+          </button>
 
           <button
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/sign-up")}
             className="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
             style={{
               backgroundColor: "var(--accent-color)",
